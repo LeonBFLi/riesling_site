@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-labelledby="title desc">
+  <title id="title">2022年3月 茶香与键盘</title>
+  <desc id="desc">温暖的茶具插画，呈现手冲茶的瞬间。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e0f2ff" />
+      <stop offset="100%" stop-color="#f6fbff" />
+    </linearGradient>
+    <radialGradient id="steam" cx="0.5" cy="0.2" r="0.6">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.9)" />
+      <stop offset="100%" stop-color="rgba(255,255,255,0)" />
+    </radialGradient>
+  </defs>
+  <rect width="800" height="520" fill="url(#bg)" rx="32" />
+  <ellipse cx="400" cy="380" rx="220" ry="90" fill="rgba(58,123,213,0.12)" />
+  <g transform="translate(200 160)">
+    <ellipse cx="200" cy="180" rx="140" ry="48" fill="#f9f3eb" />
+    <ellipse cx="200" cy="176" rx="110" ry="32" fill="#f0e4d3" />
+    <ellipse cx="200" cy="172" rx="80" ry="22" fill="#d8b38c" />
+    <g opacity="0.9">
+      <path d="M170 60 h60 l10 110 q-40 18 -80 0z" fill="#f0f5ff" stroke="#c4d9f7" stroke-width="4" stroke-linejoin="round" />
+      <ellipse cx="200" cy="70" rx="40" ry="16" fill="#c4d9f7" />
+      <ellipse cx="200" cy="64" rx="36" ry="12" fill="#eff5ff" />
+    </g>
+    <g>
+      <path d="M110 132 q60 -50 110 -18 q50 32 110 -18" fill="none" stroke="#ffe1b8" stroke-width="10" stroke-linecap="round" opacity="0.4" />
+    </g>
+    <g opacity="0.85">
+      <ellipse cx="320" cy="120" rx="32" ry="12" fill="#d8b38c" />
+      <ellipse cx="320" cy="118" rx="26" ry="8" fill="#f5e5d1" />
+      <path d="M300 40 h40 l12 70 q-32 12 -64 0z" fill="#f5f1ea" stroke="#e4d6c2" stroke-width="3" />
+    </g>
+    <g opacity="0.35">
+      <ellipse cx="200" cy="-10" rx="46" ry="38" fill="url(#steam)" />
+      <ellipse cx="240" cy="-30" rx="36" ry="30" fill="url(#steam)" />
+    </g>
+    <rect x="-40" y="210" width="480" height="18" fill="#dce7f7" rx="9" />
+  </g>
+  <text x="400" y="470" font-size="32" text-anchor="middle" fill="rgba(31,61,90,0.6)" font-family="'Noto Sans SC','PingFang SC',sans-serif">热茶的香气提醒我们：别忘了善待自己</text>
+</svg>
