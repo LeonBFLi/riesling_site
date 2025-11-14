@@ -1,13 +1,15 @@
-# Riesling Site (Warm Lounge Edition)
+# 1206 心灵休憩小客厅（毕业季版）
 
-A lightweight Flask application that offers a cozy landing page, a simple video player for media stored in `/opt/video`, and a guestbook that writes visitor notes to `/etc/data/messages.log` so the host can collect them via a bind mount.
+一个轻盈的 Flask 单页应用，用温柔的蓝色基调收纳这段旅程：首页呈现暖心问候、互动式时间轴、
+位于 `/opt/video` 的视频播放器，以及写入 `/etc/data/messages.log` 的留言本，方便通过挂载目录在宿主机上收集。
 
 ## Features
 
-- **Warm single-page UI** optimised for low resource usage inside the container.
-- **Video playback** for files located in `/opt/video` (mount a host folder there to supply media).
-- **Minimal guestbook** that stores submissions with UTC timestamps on the host.
-- **Health probe** available at `/health` for container orchestration.
+- **温馨首页**：更新为浅蓝色背景与毕业季主题文案。
+- **心动时间册**：时间戳式互动元素，可逐一查看每个阶段的插图或占位图，方便替换成真实照片与视频。
+- **视频播放器**：读取 `/opt/video` 中的媒体文件，40M 的毕业季影片挂载后会自动出现。
+- **留言本**：访客留言保存至宿主机绑定的目录，并附带 UTC 时间戳。
+- **健康检查**：`/health` 端点可用于容器编排探测。
 
 ## Prerequisites
 
@@ -54,21 +56,19 @@ image. From the project root, run:
 docker build -t riesling-site .
 ```
 
-Start the container with any volumes you need mounted for media playback or the
-guestbook log. The example below exposes the web application, mounts a host
-folder with videos as read-only, and mounts a directory for guestbook entries:
+启动容器时记得挂载所需目录，这样媒体与留言才能被持久化。下面的命令示例包含详细参数说明：
 
 ```bash
 docker run \
-  --name riesling-site \
-  -p 1206:1206 \
-  -v /var/host-videos:/opt/video:ro \
-  -v /var/nextchat:/etc/data \
+  --name 1206-lounge \
+  --publish 1206:1206 \
+  --env TZ=Asia/Shanghai \
+  --mount type=bind,src=/srv/grad-memory/videos,dst=/opt/video,ro \
+  --mount type=bind,src=/srv/grad-memory/messages,dst=/etc/data \
+  --restart unless-stopped \
   riesling-site
 ```
 
-- Videos copied to `/var/host-videos` on the host appear in the drop-down list
-  in the UI.
-- Guestbook submissions append to `/var/nextchat/messages.log` on the host.
-- Stop the container with `docker stop riesling-site` and remove it with
-  `docker rm riesling-site` when you are done.
+- 将 40M 的毕业季 MP4 拷贝到 `/srv/grad-memory/videos` 后，播放器会在下拉列表中显示它。
+- 留言内容会写入 `/srv/grad-memory/messages/messages.log`，可随时在宿主机查看或备份。
+- 使用 `docker stop 1206-lounge` 停止容器，如需删除可运行 `docker rm 1206-lounge`。

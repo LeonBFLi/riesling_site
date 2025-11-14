@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const player = document.getElementById("video-player");
   const feedback = document.getElementById("guestbook-feedback");
   const form = document.getElementById("guestbook-form");
+  const timelineItems = document.querySelectorAll(".timeline__item");
+  const timelinePanels = document.querySelectorAll(".timeline__panel");
 
   const setFeedback = (message, isError = false) => {
     if (!feedback) return;
@@ -67,6 +69,48 @@ document.addEventListener("DOMContentLoaded", () => {
           submitButton.textContent = "送出温暖";
         }
       }
+    });
+  }
+
+  if (timelineItems.length > 0 && timelinePanels.length > 0) {
+    const activateTimeline = (targetId) => {
+      timelinePanels.forEach((panel) => {
+        const isActive = panel.id === targetId;
+        panel.classList.toggle("timeline__panel--active", isActive);
+        panel.setAttribute("aria-hidden", String(!isActive));
+      });
+
+      timelineItems.forEach((item) => {
+        const isActive = item.dataset.target === targetId;
+        item.classList.toggle("timeline__item--active", isActive);
+        item.setAttribute("aria-pressed", String(isActive));
+      });
+    };
+
+    const defaultActive = document.querySelector(".timeline__item.timeline__item--active");
+    if (defaultActive?.dataset.target) {
+      activateTimeline(defaultActive.dataset.target);
+    } else if (timelineItems[0]?.dataset.target) {
+      activateTimeline(timelineItems[0].dataset.target);
+    }
+
+    timelineItems.forEach((item) => {
+      item.addEventListener("click", () => {
+        const targetId = item.dataset.target;
+        if (targetId) {
+          activateTimeline(targetId);
+        }
+      });
+
+      item.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          const targetId = item.dataset.target;
+          if (targetId) {
+            activateTimeline(targetId);
+          }
+        }
+      });
     });
   }
 });

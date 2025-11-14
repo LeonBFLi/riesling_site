@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 640">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b8d9ff" />
+      <stop offset="100%" stop-color="#f3f8ff" />
+    </linearGradient>
+    <linearGradient id="screen" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3578d4" />
+      <stop offset="100%" stop-color="#5aa6ff" />
+    </linearGradient>
+  </defs>
+  <rect width="960" height="640" rx="48" fill="url(#bg)" />
+  <g transform="translate(140 120)">
+    <rect width="680" height="360" rx="36" fill="#ffffff" opacity="0.85" />
+    <rect x="60" y="70" width="560" height="260" rx="26" fill="url(#screen)" />
+    <polygon points="370,200 260,140 260,260" fill="#ffffff" opacity="0.92" />
+    <circle cx="120" cy="220" r="36" fill="#ffffff" opacity="0.25" />
+    <circle cx="600" cy="120" r="28" fill="#ffffff" opacity="0.35" />
+    <text x="40" y="30" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="48" font-weight="700" fill="#215aa1">
+      2023年12月6日 · 视频待入场
+    </text>
+    <text x="40" y="420" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="26" fill="#3e76bd">
+      40M 的回忆影片将放在宿主机指定目录，待挂载后自动亮起。
+    </text>
+  </g>
+</svg>
