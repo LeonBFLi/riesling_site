@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>温馨的葡萄园</title>
+    <title>1206心灵休憩小客厅（毕业季版）</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -19,10 +19,10 @@
   <body>
     <header class="hero">
       <div class="hero__content">
-        <h1>欢迎来到 Riesling 的小客厅</h1>
+        <h1>欢迎来到 1206 心灵休憩小客厅（毕业季版）</h1>
         <p>
-          在这里，您可以放松地欣赏家庭视频，也可以给未来的自己留下一句悄悄话。
-          我们为镜像进行了轻量化配置，让它在任何机器上都能安静地运行。
+          这一页蓝色的背景，想陪你回顾一路的心情。慢慢播放那些珍藏的视频，
+          也可以在时间线里轻触每一个脚印，写下给未来的问候。
         </p>
       </div>
     </header>
@@ -43,10 +43,186 @@
             您的浏览器不支持播放此视频。
           </video>
         </div>
-        <p class="hint">提示：使用 Docker 时，将宿主机的 /opt/video 挂载到容器中即可播放。</p>
+        <p class="hint">
+          提示：把宿主机里存放视频的目录挂载到容器的 <code>/opt/video</code>，刷新页面后就能出现在下拉框里。
+        </p>
         {% else %}
         <p class="empty">目前还没有可播放的视频。把文件放到 /opt/video 中再刷新试试吧！</p>
         {% endif %}
+      </section>
+
+      <section class="card timeline">
+        <h2>🕰️ 心情时间线</h2>
+        <p class="timeline__intro">
+          轻点每一个时间戳，就能翻开那段小故事。照片都妥帖地保存着，还留了一个位置等你把 2023 年 12 月 6 日的影片放进来。
+        </p>
+        <div class="timeline__container">
+          <nav class="timeline__nav" aria-label="时间刻度">
+            <button
+              class="timeline__marker timeline__marker--active"
+              type="button"
+              data-entry="2021-01"
+              aria-controls="timeline-entry-2021-01"
+              aria-pressed="true"
+            >
+              <span class="timeline__date">2021 年 1 月</span>
+              <span class="timeline__title">蓝色的日程表</span>
+            </button>
+            <button
+              class="timeline__marker"
+              type="button"
+              data-entry="2021-06"
+              aria-controls="timeline-entry-2021-06"
+              aria-pressed="false"
+            >
+              <span class="timeline__date">2021 年 6 月</span>
+              <span class="timeline__title">办公室的午后</span>
+            </button>
+            <button
+              class="timeline__marker"
+              type="button"
+              data-entry="2022-03"
+              aria-controls="timeline-entry-2022-03"
+              aria-pressed="false"
+            >
+              <span class="timeline__date">2022 年 3 月</span>
+              <span class="timeline__title">茶香与键盘声</span>
+            </button>
+            <button
+              class="timeline__marker"
+              type="button"
+              data-entry="2023-12-06"
+              aria-controls="timeline-entry-2023-12-06"
+              aria-pressed="false"
+            >
+              <span class="timeline__date">2023 年 12 月 6 日</span>
+              <span class="timeline__title">影片的留白</span>
+            </button>
+            <button
+              class="timeline__marker"
+              type="button"
+              data-entry="2024-01-31"
+              aria-controls="timeline-entry-2024-01-31"
+              aria-pressed="false"
+            >
+              <span class="timeline__date">2024 年 1 月 31 日</span>
+              <span class="timeline__title">航站楼的灯</span>
+            </button>
+          </nav>
+
+          <div class="timeline__entries">
+            <article
+              class="timeline__entry timeline__entry--active"
+              id="timeline-entry-2021-01"
+              role="group"
+              aria-labelledby="timeline-entry-2021-01-title"
+              aria-hidden="false"
+            >
+              <header>
+                <h3 id="timeline-entry-2021-01-title">2021 年 1 月 · 新年的课程节奏</h3>
+              </header>
+              <figure class="timeline__figure">
+                <img
+                  src="{{ url_for('static', filename='img/timeline/2021-01-calendar.svg') }}"
+                  alt="一张蓝色渐变背景的课程表，标记着 2021 年 1 月的日程"
+                  loading="lazy"
+                />
+              </figure>
+              <p>那时候的我们，用满满的日程表安排梦想。新的一年从温柔的蓝色里开场。</p>
+            </article>
+
+            <article
+              class="timeline__entry"
+              id="timeline-entry-2021-06"
+              role="group"
+              aria-labelledby="timeline-entry-2021-06-title"
+              aria-hidden="true"
+            >
+              <header>
+                <h3 id="timeline-entry-2021-06-title">2021 年 6 月 · 阳光透进教室</h3>
+              </header>
+              <figure class="timeline__figure timeline__figure--grid">
+                <img
+                  src="{{ url_for('static', filename='img/timeline/2021-06-office-1.svg') }}"
+                  alt="教室前厅的落地窗与圆桌"
+                  loading="lazy"
+                />
+                <img
+                  src="{{ url_for('static', filename='img/timeline/2021-06-office-2.svg') }}"
+                  alt="明亮办公室里整齐的工位与玻璃隔断"
+                  loading="lazy"
+                />
+              </figure>
+              <p>六月的光和小客厅的绿植一起，记录下每次排练、每次讨论还有不止一次的欢笑。</p>
+            </article>
+
+            <article
+              class="timeline__entry"
+              id="timeline-entry-2022-03"
+              role="group"
+              aria-labelledby="timeline-entry-2022-03-title"
+              aria-hidden="true"
+            >
+              <header>
+                <h3 id="timeline-entry-2022-03-title">2022 年 3 月 · 一杯热茶的陪伴</h3>
+              </header>
+              <figure class="timeline__figure">
+                <img
+                  src="{{ url_for('static', filename='img/timeline/2022-03-tea.svg') }}"
+                  alt="桌面上手冲热茶的瞬间"
+                  loading="lazy"
+                />
+              </figure>
+              <p>茶香从杯沿氤氲开来，像是提醒我们在忙碌中也要记得停下来，好好呼吸。</p>
+            </article>
+
+            <article
+              class="timeline__entry"
+              id="timeline-entry-2023-12-06"
+              role="group"
+              aria-labelledby="timeline-entry-2023-12-06-title"
+              aria-hidden="true"
+            >
+              <header>
+                <h3 id="timeline-entry-2023-12-06-title">2023 年 12 月 6 日 · 影片即将上线</h3>
+              </header>
+              <figure class="timeline__figure">
+                <div class="timeline__placeholder" role="img" aria-label="等待上传的毕业纪念视频">
+                  <span class="timeline__placeholder-icon" aria-hidden="true">🎬</span>
+                  <span class="timeline__placeholder-text">40 MB 的毕业季影片待上传</span>
+                </div>
+              </figure>
+              <p>
+                这段 40 MB 的 MP4 还在打磨中。把它命名为 <code>2023-12-06-graduation.mp4</code> 放进
+                <code>/opt/video</code>，时间线就会自动播放。
+              </p>
+              <video class="timeline__video" controls preload="metadata">
+                <source src="/videos/2023-12-06-graduation.mp4" type="video/mp4" />
+                影片上传后刷新页面即可播放。
+              </video>
+            </article>
+
+            <article
+              class="timeline__entry"
+              id="timeline-entry-2024-01-31"
+              role="group"
+              aria-labelledby="timeline-entry-2024-01-31-title"
+              aria-hidden="true"
+            >
+              <header>
+                <h3 id="timeline-entry-2024-01-31-title">2024 年 1 月 31 日 · 在航站楼告别</h3>
+              </header>
+              <figure class="timeline__figure">
+                <img
+                  src="{{ url_for('static', filename='img/timeline/2024-01-31-terminal.svg') }}"
+                  alt="机场航站楼指引牌，箭头指向 2 楼的地铁与停车场"
+                  loading="lazy"
+                />
+              </figure>
+              <p>航站楼的灯光与指引牌见证了分别前的拥抱，也提醒我们：下一段旅程继续前行。</p>
+            </article>
+          </div>
+        </div>
       </section>
 
       <section class="card">
@@ -79,7 +255,7 @@
     </main>
 
     <footer class="footer">
-      <p>期待下一次的相聚。容器默认监听 1206 端口，祝您使用愉快！</p>
+      <p>愿 1206 的小客厅一直为你亮着灯。服务默认监听 1206 端口，随时欢迎回来坐坐。</p>
     </footer>
   </body>
 </html>

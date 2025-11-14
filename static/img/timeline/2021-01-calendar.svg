@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-labelledby="title desc">
+  <title id="title">2021年1月的蓝色课程表</title>
+  <desc id="desc">蓝色渐变背景上的日历页面，突出显示一月的温暖计划。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7bc6ff" />
+      <stop offset="100%" stop-color="#d4e9ff" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="520" fill="url(#bg)" rx="32" />
+  <g transform="translate(120 90)">
+    <rect width="560" height="360" rx="28" fill="rgba(255,255,255,0.86)" />
+    <rect x="0" y="0" width="560" height="90" rx="28" fill="#3a7bd5" />
+    <text x="40" y="58" font-size="42" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" fill="#ffffff" font-weight="600">2021 · JAN</text>
+    <g transform="translate(40 120)" fill="#3a7bd5" opacity="0.68">
+      <g font-size="24" fill="#3a7bd5" font-family="'Noto Sans SC', 'PingFang SC', sans-serif">
+        <text x="0" y="0">Mon</text>
+        <text x="72" y="0">Tue</text>
+        <text x="150" y="0">Wed</text>
+        <text x="228" y="0">Thu</text>
+        <text x="312" y="0">Fri</text>
+        <text x="396" y="0">Sat</text>
+        <text x="474" y="0">Sun</text>
+      </g>
+      <g stroke="#3a7bd5" stroke-width="3" fill="none" opacity="0.35">
+        <rect x="-12" y="24" width="88" height="64" rx="16" />
+        <rect x="66" y="24" width="88" height="64" rx="16" />
+        <rect x="144" y="24" width="88" height="64" rx="16" />
+        <rect x="222" y="24" width="88" height="64" rx="16" />
+        <rect x="300" y="24" width="88" height="64" rx="16" />
+        <rect x="378" y="24" width="88" height="64" rx="16" />
+        <rect x="456" y="24" width="88" height="64" rx="16" />
+      </g>
+      <g fill="#3a7bd5" opacity="0.5">
+        <circle cx="32" cy="56" r="6" />
+        <circle cx="108" cy="56" r="6" />
+        <circle cx="344" cy="56" r="6" />
+        <circle cx="420" cy="56" r="6" />
+        <circle cx="496" cy="56" r="6" />
+        <circle cx="184" cy="56" r="6" />
+      </g>
+      <g fill="#3a7bd5" opacity="0.8" font-size="20" font-family="'Noto Sans SC', 'PingFang SC', sans-serif">
+        <text x="-4" y="122">口语彩排</text>
+        <text x="150" y="122">模拟面试</text>
+        <text x="306" y="122">写作打卡</text>
+      </g>
+    </g>
+  </g>
+  <text x="400" y="470" font-size="32" text-anchor="middle" fill="rgba(0,0,0,0.45)" font-family="'Noto Sans SC', 'PingFang SC', sans-serif">蓝色的日程表带来新年的希望</text>
+</svg>

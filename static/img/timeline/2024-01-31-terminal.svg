@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-labelledby="title desc">
+  <title id="title">2024年1月31日 航站楼指引牌</title>
+  <desc id="desc">夜色中的航站楼指引牌，带有温暖的指向箭头。</desc>
+  <defs>
+    <linearGradient id="night" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a2c4f" />
+      <stop offset="100%" stop-color="#132036" />
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffe36d" />
+      <stop offset="100%" stop-color="#ff9c4a" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="520" fill="url(#night)" rx="32" />
+  <g opacity="0.25" fill="#ffffff">
+    <circle cx="120" cy="120" r="4" />
+    <circle cx="220" cy="80" r="3" />
+    <circle cx="400" cy="60" r="5" />
+    <circle cx="620" cy="110" r="4" />
+    <circle cx="700" cy="160" r="3" />
+  </g>
+  <g>
+    <rect x="300" y="60" width="160" height="400" rx="24" fill="#111d33" stroke="#20365c" stroke-width="4" />
+    <rect x="320" y="100" width="120" height="90" rx="16" fill="url(#glow)" />
+    <rect x="320" y="210" width="120" height="70" rx="16" fill="#1f3561" />
+    <rect x="320" y="300" width="120" height="70" rx="16" fill="#1f3561" />
+    <rect x="320" y="390" width="120" height="40" rx="16" fill="#1f3561" />
+    <path d="M332 250 h52 l16 16 l-16 16 h-52z" fill="#ffd56a" />
+    <path d="M332 335 h52 l16 16 l-16 16 h-52z" fill="#ffd56a" />
+    <text x="380" y="152" font-size="40" text-anchor="middle" fill="#1a2c4f" font-weight="700" font-family="'Noto Sans SC','PingFang SC',sans-serif">T3</text>
+    <text x="380" y="188" font-size="20" text-anchor="middle" fill="#1a2c4f" font-family="'Noto Sans SC','PingFang SC',sans-serif">航站楼</text>
+    <text x="380" y="246" font-size="20" text-anchor="middle" fill="#e6efff" font-family="'Noto Sans SC','PingFang SC',sans-serif">城际铁路</text>
+    <text x="380" y="286" font-size="16" text-anchor="middle" fill="#97b5e8" font-family="'Noto Sans SC','PingFang SC',sans-serif">前往地铁</text>
+    <text x="380" y="326" font-size="20" text-anchor="middle" fill="#e6efff" font-family="'Noto Sans SC','PingFang SC',sans-serif">P 停车场</text>
+    <text x="380" y="406" font-size="16" text-anchor="middle" fill="#97b5e8" font-family="'Noto Sans SC','PingFang SC',sans-serif">B1 · B2</text>
+  </g>
+  <g opacity="0.25" fill="#1f3561">
+    <rect x="170" y="340" width="120" height="20" rx="10" />
+    <rect x="520" y="360" width="150" height="24" rx="12" />
+  </g>
+  <text x="400" y="470" font-size="30" text-anchor="middle" fill="#d0e3ff" font-family="'Noto Sans SC','PingFang SC',sans-serif">航站楼的灯亮着，等你们平安启程</text>
+</svg>
