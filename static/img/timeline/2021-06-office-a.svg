@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 640">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c1e3ff" />
+      <stop offset="100%" stop-color="#f6fbff" />
+    </linearGradient>
+  </defs>
+  <rect width="960" height="640" rx="46" fill="url(#bg)" />
+  <g fill="#ffffff" opacity="0.7">
+    <rect x="80" y="80" width="800" height="480" rx="36" />
+  </g>
+  <g transform="translate(120 140)">
+    <rect x="0" y="0" width="720" height="360" rx="28" fill="#eff7ff" stroke="#b7d8ff" stroke-width="3" />
+    <rect x="40" y="40" width="280" height="220" rx="24" fill="#ffffff" stroke="#9ec7ff" stroke-width="2" />
+    <rect x="360" y="40" width="280" height="220" rx="24" fill="#ffffff" stroke="#9ec7ff" stroke-width="2" />
+    <g transform="translate(60 70)" opacity="0.9">
+      <rect x="0" y="0" width="90" height="150" rx="12" fill="#d0e6ff" />
+      <rect x="100" y="0" width="120" height="150" rx="12" fill="#a7ccff" />
+      <rect x="230" y="0" width="40" height="150" rx="12" fill="#7fb4ff" />
+    </g>
+    <g transform="translate(380 70)" opacity="0.95">
+      <rect x="0" y="0" width="220" height="60" rx="12" fill="#63a0f2" />
+      <rect x="0" y="70" width="220" height="40" rx="10" fill="#8bb7f7" />
+      <rect x="0" y="120" width="220" height="40" rx="10" fill="#bad7ff" />
+    </g>
+    <text x="0" y="320" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="48" font-weight="700" fill="#2360a8">
+      2021年6月 · 办公室窗边
+    </text>
+    <text x="0" y="360" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="26" fill="#437fc9">
+      窗外的绿与玻璃上映出的期待相互映衬。
+    </text>
+  </g>
+</svg>

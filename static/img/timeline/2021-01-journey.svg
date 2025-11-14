@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 640">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#84b7ff" />
+      <stop offset="100%" stop-color="#d7e8ff" />
+    </linearGradient>
+    <linearGradient id="card" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.6" />
+    </linearGradient>
+  </defs>
+  <rect width="960" height="640" rx="42" fill="url(#bg)" />
+  <g opacity="0.65">
+    <circle cx="160" cy="160" r="38" fill="#ffffff" />
+    <circle cx="220" cy="460" r="28" fill="#ffffff" />
+    <circle cx="720" cy="120" r="44" fill="#ffffff" />
+    <circle cx="810" cy="430" r="34" fill="#ffffff" />
+  </g>
+  <g transform="translate(130 120)">
+    <rect width="700" height="420" rx="32" fill="url(#card)" stroke="#b8d7ff" stroke-width="3" />
+    <g transform="translate(60 60)">
+      <text x="0" y="0" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="54" font-weight="700" fill="#2263b8">
+        2021年1月
+      </text>
+      <text x="0" y="82" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="30" fill="#356abf">
+        蓝色的日历翻开旅程的第一页
+      </text>
+      <rect x="0" y="120" width="580" height="260" rx="26" fill="#edf4ff" stroke="#b8d7ff" stroke-width="2" />
+      <g transform="translate(30 170)">
+        <rect x="0" y="0" width="140" height="110" rx="20" fill="#9cc7ff" opacity="0.6" />
+        <rect x="160" y="0" width="140" height="110" rx="20" fill="#6eaefc" opacity="0.8" />
+        <rect x="320" y="0" width="140" height="110" rx="20" fill="#4898fa" opacity="0.9" />
+        <rect x="480" y="0" width="40" height="110" rx="18" fill="#2c80ef" opacity="0.9" />
+      </g>
+      <text x="20" y="360" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="24" fill="#2c5f9e">
+        那时我们一起为梦想排定日程，每一格都写着光亮。
+      </text>
+    </g>
+  </g>
+</svg>

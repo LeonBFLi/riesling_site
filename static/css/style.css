@@ -1,11 +1,11 @@
 :root {
-  --bg-gradient: linear-gradient(135deg, #fde5ec, #fff6e5);
-  --card-bg: rgba(255, 255, 255, 0.85);
-  --primary: #f07b72;
-  --primary-dark: #d95e57;
-  --text: #52382f;
-  --muted: #927c72;
-  --shadow: 0 20px 45px rgba(210, 142, 129, 0.25);
+  --bg-gradient: linear-gradient(135deg, #cfe8ff, #f4f9ff);
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --primary: #3a7bd5;
+  --primary-dark: #2d63ad;
+  --text: #1f3558;
+  --muted: #53759d;
+  --shadow: 0 20px 45px rgba(74, 128, 185, 0.18);
   --radius-lg: 28px;
   font-size: 16px;
 }
@@ -33,7 +33,7 @@ body {
 .hero__content {
   max-width: 680px;
   margin: 0 auto;
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.75);
   border-radius: var(--radius-lg);
   padding: 2.5rem 2rem;
   box-shadow: var(--shadow);
@@ -64,6 +64,10 @@ body {
   padding: 2.25rem;
   box-shadow: var(--shadow);
   backdrop-filter: blur(10px);
+}
+
+.card--timeline {
+  overflow: hidden;
 }
 
 .card h2 {
@@ -145,6 +149,86 @@ body {
   line-height: 1.6;
 }
 
+.timeline {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 1.75rem;
+}
+
+.timeline__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.timeline__item {
+  border: none;
+  background: rgba(58, 123, 213, 0.14);
+  color: var(--primary-dark);
+  padding: 0.75rem 1.35rem;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.timeline__item:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(58, 123, 213, 0.25);
+}
+
+.timeline__item:hover,
+.timeline__item.timeline__item--active {
+  background: var(--primary);
+  color: #fff;
+}
+
+.timeline__panels {
+  position: relative;
+  min-height: 360px;
+}
+
+.timeline__panel {
+  display: none;
+  animation: fadeIn 0.45s ease;
+}
+
+.timeline__panel--active {
+  display: block;
+}
+
+.timeline__figure {
+  display: grid;
+  gap: 1rem;
+}
+
+.timeline__figure img {
+  width: 100%;
+  border-radius: 24px;
+  box-shadow: 0 12px 32px rgba(74, 128, 185, 0.15);
+}
+
+.timeline__figure--grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.timeline__figure figcaption {
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .feedback {
   margin-top: 1.25rem;
   min-height: 1.5rem;
@@ -182,5 +266,14 @@ body {
 
   .card {
     padding: 1.75rem;
+  }
+
+  .timeline__nav {
+    gap: 0.5rem;
+  }
+
+  .timeline__item {
+    flex: 1 1 calc(50% - 0.5rem);
+    text-align: center;
   }
 }

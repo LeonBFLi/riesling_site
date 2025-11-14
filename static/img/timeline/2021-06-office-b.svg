@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 640">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d3ecff" />
+      <stop offset="100%" stop-color="#fdfdff" />
+    </linearGradient>
+  </defs>
+  <rect width="960" height="640" rx="50" fill="url(#bg)" />
+  <g transform="translate(120 120)">
+    <rect width="720" height="400" rx="32" fill="#ffffff" opacity="0.9" />
+    <rect x="40" y="60" width="640" height="220" rx="24" fill="#e8f3ff" stroke="#a8cdf7" stroke-width="3" />
+    <g transform="translate(70 100)" opacity="0.85">
+      <rect x="0" y="0" width="520" height="70" rx="16" fill="#9cc6ff" />
+      <rect x="0" y="90" width="520" height="70" rx="16" fill="#b7d8ff" />
+    </g>
+    <g transform="translate(620 20)" opacity="0.75">
+      <rect width="50" height="160" rx="12" fill="#6eabf7" />
+    </g>
+    <text x="40" y="40" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="48" font-weight="700" fill="#215a9f">
+      2021年6月 · 教室走廊
+    </text>
+    <text x="40" y="340" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="26" fill="#3c76ba">
+      玻璃隔断后的灯光仍然温柔，我们的脚步没有停下。
+    </text>
+  </g>
+</svg>
