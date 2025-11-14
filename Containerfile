@@ -1,12 +1,15 @@
-# Use the official Apache HTTP Server image as the base image
-FROM nginx:latest
+FROM python:3.11-slim
 
-# Set the working directory to the Apache document root
-WORKDIR /usr/share/nginx/html
+ENV PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1
 
-# Copy your custom HTML files into the image. You have to use '.' in order to perserver the file stuctures.
-COPY . /usr/share/nginx/html
+WORKDIR /app
 
-# Restart Apache service 
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 
+COPY . .
 
+EXPOSE 1206
+
+CMD ["python", "app.py"]

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>温馨的葡萄园</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      window.initialVideos = {{ videos|tojson }};
+    </script>
+    <script defer src="{{ url_for('static', filename='js/app.js') }}"></script>
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero__content">
+        <h1>欢迎来到 Riesling 的小客厅</h1>
+        <p>
+          在这里，您可以放松地欣赏家庭视频，也可以给未来的自己留下一句悄悄话。
+          我们为镜像进行了轻量化配置，让它在任何机器上都能安静地运行。
+        </p>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="card">
+        <h2>🍇 温馨片段播放器</h2>
+        {% if videos %}
+        <label class="label" for="video-select">选择一个视频：</label>
+        <select id="video-select" class="select">
+          {% for video in videos %}
+          <option value="{{ video }}">{{ video }}</option>
+          {% endfor %}
+        </select>
+        <div class="video-wrapper">
+          <video id="video-player" controls preload="metadata">
+            <source />
+            您的浏览器不支持播放此视频。
+          </video>
+        </div>
+        <p class="hint">提示：使用 Docker 时，将宿主机的 /opt/video 挂载到容器中即可播放。</p>
+        {% else %}
+        <p class="empty">目前还没有可播放的视频。把文件放到 /opt/video 中再刷新试试吧！</p>
+        {% endif %}
+      </section>
+
+      <section class="card">
+        <h2>💌 留言时间</h2>
+        <p>
+          留下此刻的感受吧！留言内容不会在页面上显示，但我们会把它安全地保存到宿主机指定的目录中。
+        </p>
+        <form id="guestbook-form" class="form">
+          <label class="label" for="name">称呼（可选）</label>
+          <input id="name" name="name" class="input" maxlength="80" placeholder="比如：小葡萄" />
+
+          <label class="label" for="message">留言内容</label>
+          <textarea
+            id="message"
+            name="message"
+            class="textarea"
+            maxlength="500"
+            placeholder="这一刻想说的话..."
+            required
+          ></textarea>
+
+          <button type="submit" class="button">送出温暖</button>
+        </form>
+        <div id="guestbook-feedback" class="feedback" role="status" aria-live="polite"></div>
+        <p class="hint">
+          日志文件会写入 <code>/etc/data/messages.log</code>。在宿主机上挂载例如
+          <code>-v /var/nextchat:/etc/data</code> 即可查看。
+        </p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>期待下一次的相聚。容器默认监听 1206 端口，祝您使用愉快！</p>
+    </footer>
+  </body>
+</html>
