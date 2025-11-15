@@ -11,50 +11,25 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
-    <script>
-      window.initialVideos = {{ videos|tojson }};
-    </script>
     <script defer src="{{ url_for('static', filename='js/app.js') }}"></script>
   </head>
   <body>
     <header class="hero">
       <div class="hero__content">
-        <h1>欢迎来到 1206 心灵休憩小客厅（毕业季版）</h1>
+        <h1>欢迎回到 1206 心灵休憩小客厅</h1>
         <p>
-          这一页蓝色的背景，想陪你回顾一路的心情。慢慢播放那些珍藏的视频，
-          也可以在时间线里轻触每一个脚印，写下给未来的问候。
+          写下这些字的当口，就像继续昨天没说完的话。那些关于相遇、同行与错过的片段，
+          仍旧在这个小小的客厅里轻轻回响。愿你在这里放慢呼吸，温柔地触碰曾经的自己。
         </p>
       </div>
     </header>
 
     <main class="main">
-      <section class="card">
-        <h2>🍇 温馨片段播放器</h2>
-        {% if videos %}
-        <label class="label" for="video-select">选择一个视频：</label>
-        <select id="video-select" class="select">
-          {% for video in videos %}
-          <option value="{{ video }}">{{ video }}</option>
-          {% endfor %}
-        </select>
-        <div class="video-wrapper">
-          <video id="video-player" controls preload="metadata">
-            <source />
-            您的浏览器不支持播放此视频。
-          </video>
-        </div>
-        <p class="hint">
-          提示：把宿主机里存放视频的目录挂载到容器的 <code>/opt/video</code>，刷新页面后就能出现在下拉框里。
-        </p>
-        {% else %}
-        <p class="empty">目前还没有可播放的视频。把文件放到 /opt/video 中再刷新试试吧！</p>
-        {% endif %}
-      </section>
-
       <section class="card timeline">
         <h2>🕰️ 心情时间线</h2>
         <p class="timeline__intro">
-          轻点每一个时间戳，就能翻开那段小故事。照片都妥帖地保存着，还留了一个位置等你把 2023 年 12 月 6 日的影片放进来。
+          每一枚时间印章都让我想起，你像家人一样在现实与梦境之间游移。
+          细看这些照片，就像轻轻祈祷她的名字，祈祷那些爱意仍能穿越清醒与潜意识。
         </p>
         <div class="timeline__container">
           <nav class="timeline__nav" aria-label="时间刻度">
@@ -66,7 +41,7 @@
               aria-pressed="true"
             >
               <span class="timeline__date">2021 年 1 月</span>
-              <span class="timeline__title">蓝色的日程表</span>
+              <span class="timeline__title">第一次见面的蓝色课表</span>
             </button>
             <button
               class="timeline__marker"
@@ -76,7 +51,7 @@
               aria-pressed="false"
             >
               <span class="timeline__date">2021 年 6 月</span>
-              <span class="timeline__title">办公室的午后</span>
+              <span class="timeline__title">离开前的教室光影</span>
             </button>
             <button
               class="timeline__marker"
@@ -86,7 +61,7 @@
               aria-pressed="false"
             >
               <span class="timeline__date">2022 年 3 月</span>
-              <span class="timeline__title">茶香与键盘声</span>
+              <span class="timeline__title">她递来的茶香</span>
             </button>
             <button
               class="timeline__marker"
@@ -96,7 +71,7 @@
               aria-pressed="false"
             >
               <span class="timeline__date">2023 年 12 月 6 日</span>
-              <span class="timeline__title">影片的留白</span>
+              <span class="timeline__title">影片尚未说完</span>
             </button>
             <button
               class="timeline__marker"
@@ -106,7 +81,7 @@
               aria-pressed="false"
             >
               <span class="timeline__date">2024 年 1 月 31 日</span>
-              <span class="timeline__title">航站楼的灯</span>
+              <span class="timeline__title">航站楼的告别</span>
             </button>
           </nav>
 
@@ -119,7 +94,7 @@
               aria-hidden="false"
             >
               <header>
-                <h3 id="timeline-entry-2021-01-title">2021 年 1 月 · 新年的课程节奏</h3>
+                <h3 id="timeline-entry-2021-01-title">2021 年 1 月 · 新年初见的课程节奏</h3>
               </header>
               <figure class="timeline__figure">
                 <img
@@ -128,7 +103,11 @@
                   loading="lazy"
                 />
               </figure>
-              <p>那时候的我们，用满满的日程表安排梦想。新的一年从温柔的蓝色里开场。</p>
+              <p>
+                这份蓝色课程表标记了我们第一次坐在同一张桌子的时刻。
+                它像命中写好的序章，提示着我会把她当作家人一样放在心底，
+                即便后来故事的结尾没有朝着我们期盼的方向展开。
+              </p>
             </article>
 
             <article
@@ -139,7 +118,7 @@
               aria-hidden="true"
             >
               <header>
-                <h3 id="timeline-entry-2021-06-title">2021 年 6 月 · 阳光透进教室</h3>
+                <h3 id="timeline-entry-2021-06-title">2021 年 6 月 · 离开前的教室午后</h3>
               </header>
               <figure class="timeline__figure timeline__figure--grid">
                 <img
@@ -153,7 +132,10 @@
                   loading="lazy"
                 />
               </figure>
-              <p>六月的光和小客厅的绿植一起，记录下每次排练、每次讨论还有不止一次的欢笑。</p>
+              <p>
+                这是我离开的那天下午，阳光踩着桌面，连同她说的那些无关紧要的小话题一起被收进记忆。
+                看似平静的整理和告别，像是对未来自我发出的安慰：我们努力过了，纵使最后没能并肩到底。
+              </p>
             </article>
 
             <article
@@ -164,7 +146,7 @@
               aria-hidden="true"
             >
               <header>
-                <h3 id="timeline-entry-2022-03-title">2022 年 3 月 · 一杯热茶的陪伴</h3>
+                <h3 id="timeline-entry-2022-03-title">2022 年 3 月 · 茶杯的安静重量</h3>
               </header>
               <figure class="timeline__figure">
                 <img
@@ -173,7 +155,10 @@
                   loading="lazy"
                 />
               </figure>
-              <p>茶香从杯沿氤氲开来，像是提醒我们在忙碌中也要记得停下来，好好呼吸。</p>
+              <p>
+                她把茶杯放到我掌心时，没有说太多话。
+                我懂那是一种不必回礼的温柔，就像我们几乎每天都会彼此祈祷：愿对方无论身在何处，都像没离开过一样。
+              </p>
             </article>
 
             <article
@@ -184,7 +169,7 @@
               aria-hidden="true"
             >
               <header>
-                <h3 id="timeline-entry-2023-12-06-title">2023 年 12 月 6 日 · 影片即将上线</h3>
+                <h3 id="timeline-entry-2023-12-06-title">2023 年 12 月 6 日 · 未竟的影片</h3>
               </header>
               <figure class="timeline__figure">
                 <div class="timeline__placeholder" role="img" aria-label="等待上传的毕业纪念视频">
@@ -193,13 +178,9 @@
                 </div>
               </figure>
               <p>
-                这段 40 MB 的 MP4 还在打磨中。把它命名为 <code>2023-12-06-graduation.mp4</code> 放进
-                <code>/opt/video</code>，时间线就会自动播放。
+                那段 40 MB 的影像还没完成，像是命运留给我们的空白页。
+                也许重要的是过程不是结果，可我仍旧盼着有一天能把它放进这里，让我们认领那份正确的结局。
               </p>
-              <video class="timeline__video" controls preload="metadata">
-                <source src="/videos/2023-12-06-graduation.mp4" type="video/mp4" />
-                影片上传后刷新页面即可播放。
-              </video>
             </article>
 
             <article
@@ -210,16 +191,19 @@
               aria-hidden="true"
             >
               <header>
-                <h3 id="timeline-entry-2024-01-31-title">2024 年 1 月 31 日 · 在航站楼告别</h3>
+                <h3 id="timeline-entry-2024-01-31-title">2024 年 1 月 31 日 · 航站楼的送别</h3>
               </header>
               <figure class="timeline__figure">
                 <img
-                  src="{{ url_for('static', filename='img/timeline/2024-01-31-terminal.svg') }}"
-                  alt="机场航站楼指引牌，箭头指向 2 楼的地铁与停车场"
+                  src="data:image/png;base64,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"
+                  alt="昏蓝色航站楼里通向地铁的指引牌与远处的光"
                   loading="lazy"
                 />
               </figure>
-              <p>航站楼的灯光与指引牌见证了分别前的拥抱，也提醒我们：下一段旅程继续前行。</p>
+              <p>
+                这张航站楼的照片，是我们最后一次面对面的送别。
+                指引牌亮着，却照不见我们各自要走的下一段旅程；我明白她终会像猫一样在心里最脆弱的角落轻咬一下，而我仍旧全盘接受。
+              </p>
             </article>
           </div>
         </div>
@@ -228,7 +212,8 @@
       <section class="card">
         <h2>💌 留言时间</h2>
         <p>
-          留下此刻的感受吧！留言内容不会在页面上显示，但我们会把它安全地保存到宿主机指定的目录中。
+          想对她、对自己说的话，可以轻轻写在这里。
+          留言不会在页面上展示，只会安静地留在宿主机的角落，像我们暗暗守护的祈祷。
         </p>
         <form id="guestbook-form" class="form">
           <label class="label" for="name">称呼（可选）</label>
@@ -240,22 +225,22 @@
             name="message"
             class="textarea"
             maxlength="500"
-            placeholder="这一刻想说的话..."
+            placeholder="想说的话依旧在心里打转..."
             required
           ></textarea>
 
-          <button type="submit" class="button">送出温暖</button>
+          <button type="submit" class="button">轻轻寄出</button>
         </form>
         <div id="guestbook-feedback" class="feedback" role="status" aria-live="polite"></div>
         <p class="hint">
-          日志文件会写入 <code>/etc/data/messages.log</code>。在宿主机上挂载例如
-          <code>-v /var/nextchat:/etc/data</code> 即可查看。
+          日志文件仍旧写入 <code>/etc/data/messages.log</code>，在宿主机挂载
+          <code>-v /var/nextchat:/etc/data</code> 就能读到这些真切的字句。
         </p>
       </section>
     </main>
 
     <footer class="footer">
-      <p>愿 1206 的小客厅一直为你亮着灯。服务默认监听 1206 端口，随时欢迎回来坐坐。</p>
+      <p>灯还亮着，像随时准备好迎接下一次重逢。服务仍默认监听 1206 端口，你想回来的时候就回来。</p>
     </footer>
   </body>
 </html>
