@@ -3,35 +3,18 @@ from __future__ import annotations
 import os
 from datetime import datetime
 from pathlib import Path
-from typing import Iterable
 
-from flask import Flask, Response, jsonify, render_template, request, send_from_directory
+from flask import Flask, Response, jsonify, render_template, request
 
 app = Flask(__name__)
 
-VIDEO_DIR = Path(os.environ.get("VIDEO_DIRECTORY", "/opt/video")).resolve()
 DATA_DIR = Path(os.environ.get("DATA_DIRECTORY", "/etc/data")).resolve()
 LOG_FILE = DATA_DIR / "messages.log"
-ALLOWED_VIDEO_EXTENSIONS = {".mp4", ".mov", ".m4v", ".webm", ".ogg"}
-
-
-def _is_allowed_video(path: Path) -> bool:
-    return path.is_file() and path.suffix.lower() in ALLOWED_VIDEO_EXTENSIONS
-
-
-def _iter_video_files(directory: Path) -> Iterable[str]:
-    if not directory.exists():
-        return []
-    try:
-        return sorted(p.name for p in directory.iterdir() if _is_allowed_video(p))
-    except OSError:
-        return []
 
 
 @app.get("/")
 def index() -> str:
-    videos = list(_iter_video_files(VIDEO_DIR))
-    return render_template("index.html", videos=videos)
+    return render_template("index.html")
 
 
 @app.post("/guestbook")
@@ -56,15 +39,6 @@ def guestbook() -> Response:
         )
 
     return jsonify({"status": "ok"})
-
-
-@app.get("/videos/<path:filename>")
-def serve_video(filename: str):
-    safe_dir = VIDEO_DIR
-    try:
-        return send_from_directory(safe_dir, filename, as_attachment=False)
-    except FileNotFoundError:
-        return ("Video not found", 404)
 
 
 @app.get("/health")

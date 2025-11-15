@@ -1,7 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const videos = Array.isArray(window.initialVideos) ? window.initialVideos : [];
-  const select = document.getElementById("video-select");
-  const player = document.getElementById("video-player");
   const feedback = document.getElementById("guestbook-feedback");
   const form = document.getElementById("guestbook-form");
   const timelineMarkers = Array.from(document.querySelectorAll(".timeline__marker"));
@@ -22,23 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
     feedback.classList.remove("feedback--success", "feedback--error");
   };
 
-  const setVideoSource = (fileName) => {
-    if (!player || !fileName) return;
-    const source = player.querySelector("source");
-    if (!source) return;
-    const encoded = encodeURIComponent(fileName);
-    source.src = `/videos/${encoded}`;
-    player.load();
-  };
-
-  if (select && videos.length > 0) {
-    setVideoSource(select.value || videos[0]);
-    select.addEventListener("change", (event) => {
-      setVideoSource(event.target.value);
-      clearFeedback();
-    });
-  }
-
   if (form) {
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -46,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const submitButton = form.querySelector("button[type='submit']");
       if (submitButton) {
         submitButton.disabled = true;
-        submitButton.textContent = "发送中...";
+        submitButton.textContent = "正在寄出...";
       }
 
       try {
@@ -62,13 +42,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         form.reset();
-        setFeedback("留言成功！感谢你的分享。", false);
+        setFeedback("谢谢你把这段心声告诉我。", false);
       } catch (error) {
         setFeedback(error.message || "提交失败，请稍后再试。", true);
       } finally {
         if (submitButton) {
           submitButton.disabled = false;
-          submitButton.textContent = "送出温暖";
+          submitButton.textContent = "轻轻寄出";
         }
       }
     });
