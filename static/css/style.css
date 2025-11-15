@@ -254,6 +254,15 @@ body {
   height: auto;
 }
 
+.timeline__figure--photo {
+  aspect-ratio: 16 / 9;
+}
+
+.timeline__figure--photo img {
+  height: 100%;
+  object-fit: cover;
+}
+
 .timeline__figure--grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
