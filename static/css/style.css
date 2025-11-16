@@ -1,11 +1,11 @@
 :root {
-  --bg-gradient: linear-gradient(135deg, #eef2f7, #f5f1f6);
-  --card-bg: rgba(255, 255, 255, 0.85);
-  --primary: #5a6c8d;
-  --primary-dark: #3b4c6d;
-  --text: #2a3144;
-  --muted: #6f7385;
-  --shadow: 0 22px 48px rgba(59, 76, 109, 0.16);
+  --bg-gradient: radial-gradient(circle at 20% 20%, #c7f2ff 0%, #7ed3f7 30%, #1f6fb4 100%);
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --primary: #1f6fb4;
+  --primary-dark: #0d4576;
+  --text: #17324b;
+  --muted: rgba(23, 50, 75, 0.7);
+  --shadow: 0 22px 48px rgba(11, 66, 111, 0.22);
   --radius-lg: 28px;
   font-size: 16px;
 }
@@ -23,17 +23,43 @@ body {
   color: var(--text);
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before,
+body::after {
+  content: "🐋";
+  position: fixed;
+  font-size: clamp(6rem, 14vw, 12rem);
+  opacity: 0.12;
+  z-index: 0;
+  pointer-events: none;
+  filter: drop-shadow(0 8px 18px rgba(13, 69, 118, 0.45));
+}
+
+body::before {
+  top: 4vh;
+  right: 6vw;
+}
+
+body::after {
+  bottom: 5vh;
+  left: 4vw;
+  transform: scale(-1, 1);
 }
 
 .hero {
   padding: 3.5rem 1.5rem 2rem;
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
 .hero__content {
   max-width: 720px;
   margin: 0 auto;
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.78);
   border-radius: var(--radius-lg);
   padding: 2.75rem 2.25rem;
   box-shadow: var(--shadow);
@@ -56,6 +82,8 @@ body {
   margin: 0 auto 3rem;
   display: grid;
   gap: 2.5rem;
+  position: relative;
+  z-index: 1;
 }
 
 .card {
@@ -158,6 +186,11 @@ body {
   line-height: 1.6;
 }
 
+.hint--active {
+  color: var(--primary);
+  font-weight: 600;
+}
+
 .feedback {
   margin-top: 1.25rem;
   min-height: 1.5rem;
@@ -182,6 +215,8 @@ body {
   padding: 2rem 1.5rem 3rem;
   font-size: 0.95rem;
   color: var(--muted);
+  position: relative;
+  z-index: 1;
 }
 
 .timeline {
