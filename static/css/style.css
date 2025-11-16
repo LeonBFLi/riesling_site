@@ -181,6 +181,10 @@ body::after {
   font-size: 1.05rem;
   font-weight: 600;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
@@ -544,5 +548,104 @@ body::after {
 
   .letter-dialog__panel {
     padding: 2rem 1.5rem;
+  }
+}
+
+@media (max-width: 540px) {
+  :root {
+    font-size: 15px;
+  }
+
+  body {
+    padding-bottom: 2rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem 1.5rem;
+  }
+
+  .hero__content {
+    padding: 1.75rem 1.4rem;
+  }
+
+  .main {
+    width: min(960px, 96%);
+    gap: 2rem;
+  }
+
+  .card {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .timeline__nav {
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 0.6rem;
+    padding: 0.5rem 1rem 0.35rem;
+    margin: 0 -1rem;
+    scroll-snap-type: x mandatory;
+  }
+
+  .timeline__marker {
+    flex: 0 0 82%;
+    min-width: unset;
+    scroll-snap-align: start;
+  }
+
+  .timeline__entries {
+    order: 2;
+  }
+
+  .timeline__figure--grid {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline-letter__envelope {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .timeline-letter__button {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .letter-dialog__panel {
+    width: min(600px, 94%);
+    border-radius: 22px;
+  }
+}
+
+@media (max-width: 420px) {
+  :root {
+    font-size: 14px;
+  }
+
+  .hero h1 {
+    font-size: 1.65rem;
+  }
+
+  .timeline__marker {
+    flex-basis: 90%;
+  }
+
+  .timeline__figure {
+    border-radius: 18px;
+  }
+
+  .letter-dialog__panel {
+    padding: 1.5rem 1.25rem;
   }
 }
