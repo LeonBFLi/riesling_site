@@ -31,8 +31,8 @@
       <section class="card timeline">
         <h2>🕰️ 心情时间线</h2>
         <p class="timeline__intro">
-          每一枚时间印章都让我想起，你像家人一样在现实与梦境之间游移。
-          细看这些照片，就像轻轻祈祷她的名字，祈祷那些爱意仍能穿越清醒与潜意识。
+          每一个时间点切片都让我想起，你像家人一样在现实与梦境之间游移。
+          细看这些照片，就像轻轻祈祷她的名字，祈祷那些爱意仍能穿越清醒/潜意识达到新大渌。
         </p>
         <div class="timeline__container">
           <nav class="timeline__nav" aria-label="时间刻度">
@@ -242,40 +242,6 @@
             </article>
           </div>
         </div>
-      </section>
-
-      <section class="card video-player" aria-labelledby="video-player-title">
-        <div class="video-player__header">
-          <div>
-            <h2 id="video-player-title">🎬 宿主机影片播放器</h2>
-            <p>把 MP4/MOV/WebM 放进挂载的 {{ video_directory }} 目录，刷新页面后就能在这里播放。</p>
-          </div>
-        </div>
-        {% if initial_video %}
-        <div class="video-player__controls">
-          <label class="label" for="video-select">切换影片</label>
-          <select id="video-select" class="input">
-            {% for video in video_files %}
-            <option value="{{ video.url }}" data-mime-type="{{ video.mime_type }}" {% if video.name == initial_video.name %}selected{% endif %}>
-              {{ video.display_name }}
-            </option>
-            {% endfor %}
-          </select>
-        </div>
-        <video
-          id="video-player"
-          class="video-player__video"
-          controls
-          preload="metadata"
-        >
-          <source src="{{ initial_video.url }}" type="{{ initial_video.mime_type }}" />
-          抱歉，你的浏览器暂不支持 HTML5 视频播放。
-        </video>
-        {% else %}
-        <p class="hint">
-          还没有检测到可以播放的文件。请确认你在启动容器时把宿主机的 `/var/video` 之类的目录挂载到了 `/opt/video`，并放入 MP4/MOV/WebM 文件后刷新即可。
-        </p>
-        {% endif %}
       </section>
 
       <section class="card">
