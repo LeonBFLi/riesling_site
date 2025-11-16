@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const formData = new FormData(form);
         const response = await fetch("/guestbook", {
           method: "POST",
-          body: new URLSearchParams(formData),
+          body: formData,
         });
 
         if (!response.ok) {
@@ -87,5 +87,43 @@ document.addEventListener("DOMContentLoaded", () => {
     if (initiallyActive) {
       activateTimelineEntry(initiallyActive.dataset.entry);
     }
+  }
+
+  const letterDialog = document.getElementById("letter-dialog");
+  const letterOpenTrigger = document.querySelector("[data-letter-open]");
+  const letterCloseTriggers = Array.from(document.querySelectorAll("[data-letter-close]"));
+  let previouslyFocusedElement = null;
+
+  const setLetterDialogState = (shouldOpen) => {
+    if (!letterDialog) return;
+
+    if (shouldOpen) {
+      previouslyFocusedElement = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+      letterDialog.classList.add("letter-dialog--open");
+      letterDialog.removeAttribute("aria-hidden");
+      const panel = letterDialog.querySelector(".letter-dialog__panel");
+      if (panel instanceof HTMLElement) {
+        panel.focus();
+      }
+    } else {
+      letterDialog.classList.remove("letter-dialog--open");
+      letterDialog.setAttribute("aria-hidden", "true");
+      if (previouslyFocusedElement) {
+        previouslyFocusedElement.focus();
+      }
+    }
+  };
+
+  if (letterDialog && letterOpenTrigger) {
+    letterOpenTrigger.addEventListener("click", () => setLetterDialogState(true));
+    letterCloseTriggers.forEach((trigger) => {
+      trigger.addEventListener("click", () => setLetterDialogState(false));
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && letterDialog.classList.contains("letter-dialog--open")) {
+        setLetterDialogState(false);
+      }
+    });
   }
 });
