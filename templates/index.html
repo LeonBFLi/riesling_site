@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>1206心灵休憩小客厅（毕业备考季节夏日版）</title>
+    <title>1206 专属心灵休憩小客厅（夏日毕业备考季版）</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,10 +16,13 @@
   <body>
     <header class="hero">
       <div class="hero__content">
-        <h1>欢迎回到 1206 心灵休憩小客厅（毕业备考季节夏日版）</h1>
+        <h1>
+          欢迎回到 1206 专属心灵休憩小客厅
+          <span class="hero__edition">（夏日毕业备考季版）</span>
+        </h1>
         <p>
           一段消息可能会转瞬即逝，所以我希望能做一些能留存更久的东西，比如说这个小小页面。
-          愿你在这里放慢呼吸，温柔地，略带喜悦地触碰曾经的自己。
+          愿你在这里放慢呼吸，温柔地，略带喜悦地触碰曾经的自己。不必担心，这个网站会一直在。
         </p>
       </div>
     </header>
@@ -181,8 +184,7 @@
                 </div>
               </figure>
               <p>
-                那段 40 MB 的影像还没完成，像是命运留给我们的空白页。
-                也许重要的是过程不是结果，可我仍旧盼着有一天能把它放进这里，让我们认领那份正确的结局。
+                这是 1206 过生日的那一天某个人告诉我不要发送给自己的视频。我轻轻把它放在这里，期待有一天它会被观看。
               </p>
             </article>
 
@@ -233,9 +235,6 @@
           如果有想分享的喜悦/人生成长，可以轻轻写在这里。你不会在这里看到痕迹，但是我都会收到并悄悄珍藏好。
         </p>
         <form id="guestbook-form" class="form" enctype="multipart/form-data">
-          <label class="label" for="name">称呼（可选）</label>
-          <input id="name" name="name" class="input" maxlength="80" placeholder="比如：小葡萄" />
-
           <label class="label" for="message">留言内容</label>
           <textarea
             id="message"
