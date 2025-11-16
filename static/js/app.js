@@ -172,4 +172,32 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+  const videoSelect = document.getElementById("video-select");
+  const videoPlayer = document.getElementById("video-player");
+
+  if (videoSelect && videoPlayer) {
+    videoSelect.addEventListener("change", () => {
+      const selectedOption = videoSelect.selectedOptions[0];
+      if (!selectedOption) {
+        return;
+      }
+
+      const sourceUrl = selectedOption.value;
+      const mimeType = selectedOption.dataset.mimeType || "video/mp4";
+      let sourceElement = videoPlayer.querySelector("source");
+      if (!sourceElement) {
+        sourceElement = document.createElement("source");
+        videoPlayer.appendChild(sourceElement);
+      }
+
+      sourceElement.src = sourceUrl;
+      sourceElement.type = mimeType;
+      videoPlayer.load();
+      const playPromise = videoPlayer.play();
+      if (playPromise && typeof playPromise.catch === "function") {
+        playPromise.catch(() => {});
+      }
+    });
+  }
 });
