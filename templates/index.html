@@ -14,6 +14,16 @@
     <script defer src="{{ url_for('static', filename='js/app.js') }}"></script>
   </head>
   <body>
+    <div
+      class="orientation-tip"
+      id="orientation-tip"
+      role="status"
+      aria-live="polite"
+      aria-hidden="true"
+    >
+      <p>🌅 如果你使用竖屏手机，记得切换成横屏以获得最好的互动体验。</p>
+      <button type="button" class="orientation-tip__dismiss" data-orientation-dismiss>知道了</button>
+    </div>
     <header class="hero">
       <div class="hero__content">
         <h1>
@@ -28,6 +38,25 @@
     </header>
 
     <main class="main">
+      <section class="card encouragement" aria-labelledby="encouragement-title">
+        <div class="encouragement__media">
+          <img
+            src="{{ url_for('static', filename='img/blessings/final-registration-avatar.png') }}"
+            alt="刘亦菲旺事业学习的幸运头像"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <div class="encouragement__body">
+          <h2 id="encouragement-title">🏅 Final Registration Test 加油栏</h2>
+          <p>
+            没有人比我更了解，作为满分写作得主的你多擅长处理那些带来阶段性突破的考试了。
+            你的刻苦学习加上 ChatGPT 的辅助备考支持，剩下要做的就是放手、放慢脚步，把富足的心灵情绪好好送出去，而不是匮乏和紧张。
+          </p>
+          <p class="encouragement__blessing">愿 Final 一切顺利，另一片大陆上为你祈祷。</p>
+        </div>
+      </section>
+
       <section class="card timeline">
         <h2>🕰️ 心情时间线</h2>
         <p class="timeline__intro">
@@ -335,7 +364,7 @@
         </div>
         <footer class="letter-dialog__footer">
           <time datetime="2025-11-13">2025/11/13</time>
-          <span>All the best · Leon</span>
+          <span>All the best · Leon · Vancouver</span>
         </footer>
       </div>
     </div>
