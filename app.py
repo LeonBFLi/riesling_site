@@ -1,23 +1,58 @@
 from __future__ import annotations
 
+import mimetypes
 import os
 from datetime import datetime
 from pathlib import Path
 
-from flask import Flask, Response, jsonify, render_template, request
+from flask import Flask, Response, abort, jsonify, render_template, request, send_from_directory
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
 DATA_DIR = Path(os.environ.get("DATA_DIRECTORY", "/etc/data")).resolve()
+VIDEO_DIR = Path(os.environ.get("VIDEO_DIRECTORY", "/opt/video")).resolve()
 LOG_FILE = DATA_DIR / "messages.log"
 UPLOAD_DIR = DATA_DIR / "uploads"
 ALLOWED_IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg", ".gif", ".webp"}
+ALLOWED_VIDEO_SUFFIXES = {".mp4", ".webm", ".mov", ".m4v"}
+
+
+def _iter_video_files() -> list[dict[str, str]]:
+    videos: list[dict[str, str]] = []
+    if not VIDEO_DIR.exists():
+        return videos
+
+    try:
+        for entry in sorted(VIDEO_DIR.iterdir()):
+            if not entry.is_file():
+                continue
+            suffix = entry.suffix.lower()
+            if suffix not in ALLOWED_VIDEO_SUFFIXES:
+                continue
+            mime_type = mimetypes.guess_type(entry.name)[0] or "video/mp4"
+            videos.append(
+                {
+                    "name": entry.name,
+                    "display_name": entry.stem.replace("_", " ").replace("-", " "),
+                    "url": f"/videos/{entry.name}",
+                    "mime_type": mime_type,
+                }
+            )
+    except OSError:
+        return videos
+
+    return videos
 
 
 @app.get("/")
 def index() -> str:
-    return render_template("index.html")
+    video_files = _iter_video_files()
+    timeline_video = next((video for video in video_files if video["name"] == "2023-12-06-graduation.mp4"), None)
+    return render_template(
+        "index.html",
+        timeline_video=timeline_video,
+    )
 
 
 @app.post("/guestbook")
@@ -72,6 +107,25 @@ def guestbook() -> Response:
 @app.get("/health")
 def health() -> Response:
     return jsonify({"status": "ok"})
+
+
+@app.get("/videos/<path:filename>")
+def serve_video(filename: str) -> Response:
+    safe_path = Path(filename)
+    if safe_path.is_absolute() or ".." in safe_path.parts:
+        abort(404)
+
+    target = (VIDEO_DIR / safe_path).resolve()
+    try:
+        target.relative_to(VIDEO_DIR)
+    except ValueError:
+        abort(404)
+
+    if not target.exists() or not target.is_file():
+        abort(404)
+
+    relative_path = target.relative_to(VIDEO_DIR)
+    return send_from_directory(VIDEO_DIR, relative_path.as_posix())
 
 
 if __name__ == "__main__":

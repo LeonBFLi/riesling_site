@@ -31,8 +31,8 @@
       <section class="card timeline">
         <h2>🕰️ 心情时间线</h2>
         <p class="timeline__intro">
-          每一枚时间印章都让我想起，你像家人一样在现实与梦境之间游移。
-          细看这些照片，就像轻轻祈祷她的名字，祈祷那些爱意仍能穿越清醒与潜意识。
+          每一个时间点切片都让我想起，你像家人一样在现实与梦境之间游移。
+          细看这些照片，就像轻轻祈祷她的名字，祈祷那些爱意仍能穿越清醒/潜意识达到新大渌。
         </p>
         <div class="timeline__container">
           <nav class="timeline__nav" aria-label="时间刻度">
@@ -178,10 +178,25 @@
                 <h3 id="timeline-entry-2023-12-06-title">2023 年 12 月 6 日 · 未竟的影片</h3>
               </header>
               <figure class="timeline__figure">
+                {% if timeline_video %}
+                <video
+                  class="timeline__video"
+                  controls
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                >
+                  <source src="{{ timeline_video.url }}" type="{{ timeline_video.mime_type }}" />
+                  这段视频正在静静等待被播放，但当前浏览器似乎不支持 MP4 播放。
+                </video>
+                {% else %}
                 <div class="timeline__placeholder" role="img" aria-label="等待上传的毕业纪念视频">
                   <span class="timeline__placeholder-icon" aria-hidden="true">🎬</span>
                   <span class="timeline__placeholder-text">40 MB 的毕业季影片待上传</span>
                 </div>
+                {% endif %}
               </figure>
               <p>
                 这是 1206 过生日的那一天某个人告诉我不要发送给自己的视频。我轻轻把它放在这里，期待有一天它会被观看。
