@@ -1,6 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   const feedback = document.getElementById("guestbook-feedback");
   const form = document.getElementById("guestbook-form");
+  const messageField = document.getElementById("message");
+  const attachmentInput = document.getElementById("attachment");
+  const attachmentStatus = document.getElementById("attachment-status");
   const timelineMarkers = Array.from(document.querySelectorAll(".timeline__marker"));
   const timelineEntries = new Map(
     Array.from(document.querySelectorAll(".timeline__entry")).map((entry) => [entry.id.replace("timeline-entry-", ""), entry])
@@ -18,6 +21,45 @@ document.addEventListener("DOMContentLoaded", () => {
     feedback.textContent = "";
     feedback.classList.remove("feedback--success", "feedback--error");
   };
+
+  const updateAttachmentStatus = () => {
+    if (!attachmentStatus || !attachmentInput) return;
+    const file = attachmentInput.files?.[0];
+    if (file) {
+      attachmentStatus.textContent = `已附上一张图片：${file.name}`;
+      attachmentStatus.classList.add("hint--active");
+    } else {
+      attachmentStatus.textContent = attachmentStatus.dataset.defaultText || "";
+      attachmentStatus.classList.remove("hint--active");
+    }
+  };
+
+  const attachImageFile = (file) => {
+    if (!attachmentInput || !file) return;
+    const dataTransfer = new DataTransfer();
+    dataTransfer.items.add(file);
+    attachmentInput.files = dataTransfer.files;
+    updateAttachmentStatus();
+  };
+
+  if (attachmentInput) {
+    attachmentInput.addEventListener("change", updateAttachmentStatus);
+  }
+
+  if (messageField) {
+    messageField.addEventListener("paste", (event) => {
+      const clipboardFiles = Array.from(event.clipboardData?.files || []).filter((file) =>
+        file.type.startsWith("image/")
+      );
+
+      if (clipboardFiles.length === 0) {
+        return;
+      }
+
+      attachImageFile(clipboardFiles[0]);
+      setFeedback("已捕捉到这张图片，一并寄出了。", false);
+    });
+  }
 
   if (form) {
     form.addEventListener("submit", async (event) => {
@@ -43,6 +85,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         form.reset();
         setFeedback("谢谢你把这段心声告诉我。", false);
+        if (attachmentInput) {
+          attachmentInput.value = "";
+          updateAttachmentStatus();
+        }
       } catch (error) {
         setFeedback(error.message || "提交失败，请稍后再试。", true);
       } finally {

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>1206心灵休憩小客厅（又一毕业季青春夏日版）</title>
+    <title>1206心灵休憩小客厅（毕业备考季节夏日版）</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,10 +16,10 @@
   <body>
     <header class="hero">
       <div class="hero__content">
-        <h1>欢迎回到 1206 心灵休憩小客厅（又一毕业季青春夏日版）</h1>
+        <h1>欢迎回到 1206 心灵休憩小客厅（毕业备考季节夏日版）</h1>
         <p>
-          写下这些字的当口，就像继续昨天没说完的话。那些关于相遇、同行的片段，
-          仍旧在这个小小的客厅里轻轻回响。愿你在这里放慢呼吸，温柔地触碰曾经的自己。
+          一段消息可能会转瞬即逝，所以我希望能做一些能留存更久的东西，比如说这个小小页面。
+          愿你在这里放慢呼吸，温柔地，略带喜悦地触碰曾经的自己。
         </p>
       </div>
     </header>
@@ -113,11 +113,7 @@
                   loading="lazy"
                 />
               </figure>
-              <p>
-                这份蓝色课程表标记了我们第一次坐在同一张桌子的时刻。
-                它像命中写好的序章，提示着我会把她当作家人一样放在心底，
-                即便后来故事的结尾没有朝着我们期盼的方向展开。
-              </p>
+              <p>这份蓝色课程表标记了你看到我第一眼的的时刻。</p>
             </article>
 
             <article
@@ -142,10 +138,7 @@
                   loading="lazy"
                 />
               </figure>
-              <p>
-                这是我离开的那天下午，阳光踩着桌面，连同她说的那些无关紧要的小话题一起被收进记忆。
-                看似平静的整理和告别，像是对未来自我发出的安慰：我们努力过了，纵使最后没能并肩到底。
-              </p>
+              <p>这是我离开的那天下午，那些无关紧要的小话题一起被收进记忆，我记得某人去看了一场电影。</p>
             </article>
 
             <article
@@ -212,8 +205,7 @@
                 />
               </figure>
               <p>
-                这张航站楼的照片，是我们最后一次面对面的送别。
-                指引牌亮着，却照不见我们各自要走的下一段旅程；我明白她终会像猫一样在心里最脆弱的角落轻咬一下，而我仍旧全盘接受。
+                这张航站楼的照片，仍让我回忆起那年冬天有多么寒冷； 午夜梦醒时分我明白她终会像猫一样在心里最脆弱的角落轻咬一下，我全盘接受。
               </p>
             </article>
             <article
@@ -227,7 +219,6 @@
                 <div class="timeline-letter__icon" aria-hidden="true">✉️</div>
                 <div class="timeline-letter__text">
                   <h3 id="timeline-entry-letter-title">给某人的留言</h3>
-                  <p>它像是一封等待被开启的信。展开信封，就能读到那些没有来得及整理成段，却依旧炙热的心绪。</p>
                 </div>
                 <button type="button" class="timeline-letter__button" data-letter-open>打开信封</button>
               </div>
@@ -255,7 +246,9 @@
             required
           ></textarea>
 
-          <label class="label" for="attachment">附上一张与你此刻心境有关的照片（可选）</label>
+          <label class="label" for="attachment"
+            >想附图的话，直接在留言框里粘贴；或在需要时静静点这里挑选一张（可选）</label
+          >
           <input
             id="attachment"
             name="attachment"
@@ -263,15 +256,19 @@
             type="file"
             accept="image/png,image/jpeg,image/gif,image/webp"
           />
-          <p class="hint">支持 PNG / JPG / GIF / WebP，单次仅限一张，文件会一并写入宿主机。</p>
+          <p
+            class="hint"
+            id="attachment-status"
+            role="status"
+            aria-live="polite"
+            data-default-text="你可以直接在留言框粘贴一张图片（PNG / JPG / GIF / WebP）。"
+          >
+            你可以直接在留言框粘贴一张图片（PNG / JPG / GIF / WebP）。
+          </p>
 
           <button type="submit" class="button">轻轻寄出</button>
         </form>
         <div id="guestbook-feedback" class="feedback" role="status" aria-live="polite"></div>
-        <p class="hint">
-          日志文件仍旧写入 <code>/etc/data/messages.log</code>，在宿主机挂载
-          <code>-v /var/nextchat:/etc/data</code> 就能读到这些真切的字句。
-        </p>
       </section>
 
     </main>
