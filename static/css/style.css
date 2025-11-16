@@ -17,7 +17,8 @@
 }
 
 body {
-  font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "PingFang SC",
+    "Noto Sans SC", "Microsoft YaHei", sans-serif;
   min-height: 100vh;
   background: var(--bg-gradient);
   color: var(--text);
@@ -25,6 +26,8 @@ body {
   flex-direction: column;
   position: relative;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 body::before,
@@ -67,14 +70,24 @@ body::after {
 }
 
 .hero h1 {
-  font-size: 2.45rem;
+  font-size: clamp(1.7rem, 3.6vw, 2.3rem);
   margin-bottom: 1.2rem;
   color: var(--primary-dark);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.hero__edition {
+  display: block;
+  font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+  font-weight: 600;
+  color: var(--primary);
+  margin-top: 0.25rem;
 }
 
 .hero p {
   line-height: 1.95;
-  font-size: 1.08rem;
+  font-size: clamp(1rem, 1.8vw, 1.14rem);
 }
 
 .main {
