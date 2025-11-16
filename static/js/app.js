@@ -173,4 +173,39 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  const orientationTip = document.getElementById("orientation-tip");
+  if (orientationTip) {
+    const dismissButton = orientationTip.querySelector("[data-orientation-dismiss]");
+    const mobileQuery = window.matchMedia("(max-width: 768px)");
+    const portraitQuery = window.matchMedia("(orientation: portrait)");
+    let dismissed = false;
+
+    const updateOrientationTip = () => {
+      const shouldShow = !dismissed && mobileQuery.matches && portraitQuery.matches;
+      orientationTip.classList.toggle("orientation-tip--visible", shouldShow);
+      orientationTip.setAttribute("aria-hidden", shouldShow ? "false" : "true");
+    };
+
+    const bindQueryListener = (query) => {
+      if (!query) return;
+      const handler = () => updateOrientationTip();
+      if (typeof query.addEventListener === "function") {
+        query.addEventListener("change", handler);
+      } else if (typeof query.addListener === "function") {
+        query.addListener(handler);
+      }
+    };
+
+    updateOrientationTip();
+    bindQueryListener(mobileQuery);
+    bindQueryListener(portraitQuery);
+
+    if (dismissButton) {
+      dismissButton.addEventListener("click", () => {
+        dismissed = true;
+        updateOrientationTip();
+      });
+    }
+  }
+
 });
