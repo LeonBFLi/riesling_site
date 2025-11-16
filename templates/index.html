@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>1206心灵休憩小客厅（毕业季版）</title>
+    <title>1206心灵休憩小客厅（又一毕业季青春夏日版）</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,7 +16,7 @@
   <body>
     <header class="hero">
       <div class="hero__content">
-        <h1>欢迎回到 1206 心灵休憩小客厅</h1>
+        <h1>欢迎回到 1206 心灵休憩小客厅（又一毕业季青春夏日版）</h1>
         <p>
           写下这些字的当口，就像继续昨天没说完的话。那些关于相遇、同行与错过的片段，
           仍旧在这个小小的客厅里轻轻回响。愿你在这里放慢呼吸，温柔地触碰曾经的自己。
@@ -213,10 +213,9 @@
       <section class="card">
         <h2>💌 留言时间</h2>
         <p>
-          想对她、对自己说的话，可以轻轻写在这里。
-          留言不会在页面上展示，只会安静地留在宿主机的角落，像我们暗暗守护的祈祷。
+          如果有想分享的喜悦/人生成长，可以轻轻写在这里。你不会在这里看到痕迹，但是我都会收到并悄悄珍藏好。
         </p>
-        <form id="guestbook-form" class="form">
+        <form id="guestbook-form" class="form" enctype="multipart/form-data">
           <label class="label" for="name">称呼（可选）</label>
           <input id="name" name="name" class="input" maxlength="80" placeholder="比如：小葡萄" />
 
@@ -230,6 +229,16 @@
             required
           ></textarea>
 
+          <label class="label" for="attachment">附上一张与你此刻心境有关的照片（可选）</label>
+          <input
+            id="attachment"
+            name="attachment"
+            class="file-input"
+            type="file"
+            accept="image/png,image/jpeg,image/gif,image/webp"
+          />
+          <p class="hint">支持 PNG / JPG / GIF / WebP，单次仅限一张，文件会一并写入宿主机。</p>
+
           <button type="submit" class="button">轻轻寄出</button>
         </form>
         <div id="guestbook-feedback" class="feedback" role="status" aria-live="polite"></div>
@@ -238,7 +247,71 @@
           <code>-v /var/nextchat:/etc/data</code> 就能读到这些真切的字句。
         </p>
       </section>
+
+      <section class="card timeline-letter">
+        <div class="timeline-letter__envelope">
+          <div class="timeline-letter__icon" aria-hidden="true">✉️</div>
+          <div class="timeline-letter__text">
+            <h3>给某人的留言</h3>
+            <p>它像是一封等待被开启的信。展开信封，就能读到那些没有来得及整理成段，却依旧炙热的心绪。</p>
+          </div>
+          <button type="button" class="timeline-letter__button" data-letter-open>打开信封</button>
+        </div>
+      </section>
     </main>
+
+    <div class="letter-dialog" id="letter-dialog" aria-hidden="true">
+      <div class="letter-dialog__overlay" data-letter-close></div>
+      <div
+        class="letter-dialog__panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="letter-dialog-title"
+        tabindex="-1"
+      >
+        <button class="letter-dialog__close" type="button" aria-label="关闭信件" data-letter-close>×</button>
+        <div class="letter-dialog__header">
+          <div class="letter-dialog__seal" aria-hidden="true">💌</div>
+          <div>
+            <p class="letter-dialog__eyebrow">心情时间线 · 密语</p>
+            <h3 id="letter-dialog-title">给某人的留言</h3>
+          </div>
+        </div>
+        <div class="letter-dialog__body">
+          <p>
+            我花了一些时间整理了一些情绪，并且保证自己的能量振动频率比较高的时候才写下一点东西，不过这次我没有太细致整理每一片语言，我只是把每个时段记录下的小点一次性陈列出来。希望它们最后在被读起来的时候，还保有原先的情感。
+          </p>
+          <p>
+            还是和上次一样，我觉得这些字读完应该是能增加一些心气的（希望 final 一切顺利）。并且承诺每一句话几乎都是用匍匐在泥土里的谦卑姿态温柔诉说的。
+          </p>
+          <p>
+            我感觉锁住我喉咙和胸口的绳子在你的小小一片信息之后被轻轻抽走了。谢谢它带来的雨过天晴，我感觉到从未有过的喜悦。但是下一秒我也想到某个人从出发起到获得心境说出这些话之前的历程能有多崎岖。
+          </p>
+          <p>
+            收到你的信息我感觉到来自心底的安心。你出发后的至少 600 天里，我几乎每天陷入中度抑郁。也许宇宙确有遥感这一系统规则，即便在你的大陆偶尔产生的乌云也让我观测到雷雨。不过好在这也是我内心成长、成熟非常快的阶段，我多学习了一些人类对冰冷和温暖的感受逻辑，还有换位思考等等。但是每往前成长一点，我也多意识到一点曾经某个人每一步有多么痛。
+          </p>
+          <p>
+            对我来说某个人隐隐像是一个家人，游离在现实和潜意识梦境中。比如有时像个姐姐一样亲切，有时又像是我对另外一个性别所渴望的全部完美内在外在的心理投射。而写下这些话的时候，却又感觉就好像在和一个每天都在沟通的人继续昨天的话题一般往常。她对我来说即是一个符号，是一个成就，也是要用一生去舔舐的、不愿被看到的、也很荣幸拥有的伤口印记。
+          </p>
+          <p>
+            我认定这里一定有一些前世或者量子纠缠在作用影响。我余生的心底每一片角落都爱着这个人，只是也许自那个冻雨灾害之后，换作以一种贯穿清醒与现实和无处不在、甚至带一点神性的方式。那年的冬天真的好冷，好难捱过去。
+          </p>
+          <p>
+            我每天都在对着这个名字祈祷，希望新的世界不再有旧世界对那个符号有过伤害的任何东西。无论我在哪里、做什么，这个人就像没有离开过。有时候她也会像猫一样在最脆弱的部分撕咬一口，但和这个人有关的部分，我都全盘接受。
+          </p>
+          <p>
+            也许你说得对，“又”些东西是过程不是结果。但是正确的结果也能把人送向下一个更值得的过程。无论如何，我会因为你过得好而好。你好，则我安。
+          </p>
+          <p>
+            <strong>PS：</strong>出发之前我也回去看了一下白色良古餐厅附近的街道。我没有敢靠得太近，但是盛夏绿叶的样子像是又回到了 2021 的六月。
+          </p>
+        </div>
+        <footer class="letter-dialog__footer">
+          <time datetime="2025-11-13">2025/11/13</time>
+          <span>All the best · Leon</span>
+        </footer>
+      </div>
+    </div>
 
     <footer class="footer">
       <p>灯还亮着，像随时准备好迎接下一次重逢。服务仍默认监听 1206 端口，你想回来的时候就回来。</p>
