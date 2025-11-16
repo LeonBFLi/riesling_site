@@ -178,10 +178,25 @@
                 <h3 id="timeline-entry-2023-12-06-title">2023 年 12 月 6 日 · 未竟的影片</h3>
               </header>
               <figure class="timeline__figure">
+                {% if timeline_video %}
+                <video
+                  class="timeline__video"
+                  controls
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                >
+                  <source src="{{ timeline_video.url }}" type="{{ timeline_video.mime_type }}" />
+                  这段视频正在静静等待被播放，但当前浏览器似乎不支持 MP4 播放。
+                </video>
+                {% else %}
                 <div class="timeline__placeholder" role="img" aria-label="等待上传的毕业纪念视频">
                   <span class="timeline__placeholder-icon" aria-hidden="true">🎬</span>
                   <span class="timeline__placeholder-text">40 MB 的毕业季影片待上传</span>
                 </div>
+                {% endif %}
               </figure>
               <p>
                 这是 1206 过生日的那一天某个人告诉我不要发送给自己的视频。我轻轻把它放在这里，期待有一天它会被观看。
@@ -227,6 +242,40 @@
             </article>
           </div>
         </div>
+      </section>
+
+      <section class="card video-player" aria-labelledby="video-player-title">
+        <div class="video-player__header">
+          <div>
+            <h2 id="video-player-title">🎬 宿主机影片播放器</h2>
+            <p>把 MP4/MOV/WebM 放进挂载的 {{ video_directory }} 目录，刷新页面后就能在这里播放。</p>
+          </div>
+        </div>
+        {% if initial_video %}
+        <div class="video-player__controls">
+          <label class="label" for="video-select">切换影片</label>
+          <select id="video-select" class="input">
+            {% for video in video_files %}
+            <option value="{{ video.url }}" data-mime-type="{{ video.mime_type }}" {% if video.name == initial_video.name %}selected{% endif %}>
+              {{ video.display_name }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+        <video
+          id="video-player"
+          class="video-player__video"
+          controls
+          preload="metadata"
+        >
+          <source src="{{ initial_video.url }}" type="{{ initial_video.mime_type }}" />
+          抱歉，你的浏览器暂不支持 HTML5 视频播放。
+        </video>
+        {% else %}
+        <p class="hint">
+          还没有检测到可以播放的文件。请确认你在启动容器时把宿主机的 `/var/video` 之类的目录挂载到了 `/opt/video`，并放入 MP4/MOV/WebM 文件后刷新即可。
+        </p>
+        {% endif %}
       </section>
 
       <section class="card">
