@@ -16,39 +16,39 @@ LOG_FILE = DATA_DIR / "messages.log"
 UPLOAD_DIR = DATA_DIR / "uploads"
 ALLOWED_IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg", ".gif", ".webp"}
 ALLOWED_VIDEO_SUFFIXES = {".mp4", ".webm", ".mov", ".m4v"}
+TIMELINE_VIDEO_FILENAME = "2023-12-06-graduation.mp4"
 
 
-def _iter_video_files() -> list[dict[str, str]]:
-    videos: list[dict[str, str]] = []
-    if not VIDEO_DIR.exists():
-        return videos
+def _build_video_metadata(filename: str) -> dict[str, str] | None:
+    """Return metadata for the requested video if it exists and is allowed."""
 
+    safe_path = Path(filename)
+    if safe_path.is_absolute() or ".." in safe_path.parts:
+        return None
+
+    target = (VIDEO_DIR / safe_path).resolve()
     try:
-        for entry in sorted(VIDEO_DIR.iterdir()):
-            if not entry.is_file():
-                continue
-            suffix = entry.suffix.lower()
-            if suffix not in ALLOWED_VIDEO_SUFFIXES:
-                continue
-            mime_type = mimetypes.guess_type(entry.name)[0] or "video/mp4"
-            videos.append(
-                {
-                    "name": entry.name,
-                    "display_name": entry.stem.replace("_", " ").replace("-", " "),
-                    "url": f"/videos/{entry.name}",
-                    "mime_type": mime_type,
-                }
-            )
-    except OSError:
-        return videos
+        target.relative_to(VIDEO_DIR)
+    except ValueError:
+        return None
 
-    return videos
+    if not target.exists() or not target.is_file():
+        return None
+
+    if target.suffix.lower() not in ALLOWED_VIDEO_SUFFIXES:
+        return None
+
+    mime_type = mimetypes.guess_type(target.name)[0] or "video/mp4"
+    return {
+        "name": target.name,
+        "url": f"/videos/{target.name}",
+        "mime_type": mime_type,
+    }
 
 
 @app.get("/")
 def index() -> str:
-    video_files = _iter_video_files()
-    timeline_video = next((video for video in video_files if video["name"] == "2023-12-06-graduation.mp4"), None)
+    timeline_video = _build_video_metadata(TIMELINE_VIDEO_FILENAME)
     return render_template(
         "index.html",
         timeline_video=timeline_video,
@@ -122,6 +122,9 @@ def serve_video(filename: str) -> Response:
         abort(404)
 
     if not target.exists() or not target.is_file():
+        abort(404)
+
+    if target.suffix.lower() not in ALLOWED_VIDEO_SUFFIXES:
         abort(404)
 
     relative_path = target.relative_to(VIDEO_DIR)
