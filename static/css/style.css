@@ -271,6 +271,14 @@ body::after {
   letter-spacing: 0.01em;
 }
 
+.milestone-note__whisper {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.95rem;
+  color: rgba(26, 72, 117, 0.8);
+  letter-spacing: 0.01em;
+}
+
 .card h2 {
   font-size: 1.8rem;
   margin-bottom: 1.2rem;
