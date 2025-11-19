@@ -8,6 +8,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const timelineEntries = new Map(
     Array.from(document.querySelectorAll(".timeline__entry")).map((entry) => [entry.id.replace("timeline-entry-", ""), entry])
   );
+  const toolSecretContainer = document.getElementById("tool-share-secret");
+  const toolRevealButton = document.querySelector("[data-tool-reveal]");
+  const exportPreviewButton = document.querySelector("[data-export-preview]");
 
   const setFeedback = (message, isError = false) => {
     if (!feedback) return;
@@ -133,6 +136,65 @@ document.addEventListener("DOMContentLoaded", () => {
     if (initiallyActive) {
       activateTimelineEntry(initiallyActive.dataset.entry);
     }
+  }
+
+  if (exportPreviewButton) {
+    exportPreviewButton.addEventListener("click", () => {
+      window.print();
+    });
+  }
+
+  const escapeHtml = (value) =>
+    value
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+  const updateToolSecret = (message, isError = false) => {
+    if (!toolSecretContainer) return;
+    toolSecretContainer.classList.toggle("tool-share__secret--error", isError);
+    toolSecretContainer.textContent = message;
+  };
+
+  const fetchToolSecret = async (answer) => {
+    const response = await fetch("/tool-secret", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ answer }),
+    });
+
+    const data = await response.json().catch(() => null);
+    if (!response.ok) {
+      throw new Error(data?.message || "传送门暂时未开启。");
+    }
+
+    return typeof data?.content === "string" ? data.content : "";
+  };
+
+  if (toolRevealButton && toolSecretContainer) {
+    toolRevealButton.addEventListener("click", async () => {
+      const reply = window.prompt("和背景元素匹配那首歌是？（化*孤***）");
+      if (reply === null) return;
+
+      const answer = reply.trim();
+      if (!answer) {
+        updateToolSecret("需要先回答歌名，鲸鱼才能带路。", true);
+        return;
+      }
+
+      updateToolSecret("正在穿梭传送门...", false);
+
+      try {
+        const secretContent = await fetchToolSecret(answer);
+        const escapedContent = escapeHtml(secretContent).replace(/\n/g, "<br>");
+        toolSecretContainer.classList.remove("tool-share__secret--error");
+        toolSecretContainer.innerHTML = `<div class="tool-share__content">${escapedContent}</div>`;
+      } catch (error) {
+        updateToolSecret(error.message || "传送门暂时未开启。", true);
+      }
+    });
   }
 
   const letterDialog = document.getElementById("letter-dialog");

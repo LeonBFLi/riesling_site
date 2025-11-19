@@ -16,6 +16,8 @@ LOG_FILE = DATA_DIR / "messages.log"
 UPLOAD_DIR = DATA_DIR / "uploads"
 ALLOWED_IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg", ".gif", ".webp"}
 ALLOWED_VIDEO_SUFFIXES = {".mp4", ".webm", ".mov", ".m4v"}
+EXPECTED_TOOL_ANSWER = "化身孤岛的鲸"
+ANSWER_FILE = Path(__file__).resolve().parent / "answer.txt"
 
 
 def _iter_video_files() -> list[dict[str, str]]:
@@ -107,6 +109,28 @@ def guestbook() -> Response:
 @app.get("/health")
 def health() -> Response:
     return jsonify({"status": "ok"})
+
+
+@app.post("/tool-secret")
+def tool_secret() -> Response:
+    data = request.get_json(silent=True) or {}
+    answer = str(data.get("answer", "")).strip()
+
+    if not answer:
+        return jsonify({"message": "需要输入小提示里的歌名，才能打开这个传送门。"}), 400
+
+    if answer != EXPECTED_TOOL_ANSWER:
+        return jsonify({"message": "密码和背景鲸鱼的线索还对不上哦，再试试看。"}), 403
+
+    if not ANSWER_FILE.exists():
+        return jsonify({"message": "暂时没找到要分享的内容，请等我再检查一下。"}), 500
+
+    try:
+        content = ANSWER_FILE.read_text(encoding="utf-8")
+    except OSError:
+        return jsonify({"message": "读取文件时出了点小状况，稍后再试试。"}), 500
+
+    return jsonify({"content": content})
 
 
 @app.get("/videos/<path:filename>")

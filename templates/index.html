@@ -38,6 +38,10 @@
     </header>
 
     <main class="main">
+      <div class="utility-bar">
+        <button class="button button--secondary" type="button" data-export-preview>导出预览</button>
+      </div>
+
       <section class="card encouragement" aria-labelledby="encouragement-title">
         <div class="encouragement__media">
           <img
@@ -47,15 +51,33 @@
             decoding="async"
           />
         </div>
-          <div class="encouragement__body">
-            <h2 id="encouragement-title">🚉 不要回头 一直向前</h2>
-            <p class="encouragement__blessing">
-              就算留恋也不要回头看<br />
-              开往未来的路上<br />
-              不该有人在回返。
-            </p>
-          </div>
-        </section>
+        <div class="encouragement__body">
+          <h2 id="encouragement-title">🚉 不要回头 一直向前</h2>
+          <p class="encouragement__blessing">
+            就算留恋也不要回头看<br />
+            开往未来的路上<br />
+            不该有人在回返。
+          </p>
+        </div>
+      </section>
+
+      <section class="card tool-share" aria-labelledby="tool-share-title">
+        <h2 id="tool-share-title">🧭 回国小工具分享</h2>
+        <p class="tool-share__intro">
+          把自己长期运维的新加坡梯子节点放在这里，像一条温柔的轨迹，帮助你穿行新旧时空，偶尔也能带回一点海风的咸味。
+        </p>
+        <p class="tool-share__prompt">
+          点击下方按钮会弹出一道小问答：
+          <strong>“和背景元素匹配那首歌是？（化*孤***）”</strong>。
+          回答正确才能开启隐藏的传送门。
+        </p>
+        <button class="button tool-share__button" type="button" data-tool-reveal>尝试打开传送门</button>
+        <div id="tool-share-secret" class="tool-share__secret" aria-live="polite" role="status"></div>
+        <div class="tool-share__usage">
+          <p>得到内容后可以直接复制粘贴到你已经在用的软件里；或切换到国外 App Store 搜索并安装 <strong>v2box</strong>，再复制粘贴导入。</p>
+          <p>如果有使用问题欢迎留言。</p>
+        </div>
+      </section>
 
       <section class="card milestone-note" aria-labelledby="milestone-note-title">
         <div class="milestone-note__media" aria-hidden="true">
