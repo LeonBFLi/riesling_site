@@ -143,13 +143,6 @@ body::after {
   z-index: 1;
 }
 
-.utility-bar {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 0.75rem;
-}
-
 .card {
   background: var(--card-bg);
   border-radius: var(--radius-lg);
@@ -420,11 +413,6 @@ body::after {
   background: rgba(31, 111, 180, 0.1);
   color: var(--primary-dark);
   box-shadow: none;
-}
-
-.utility-bar .button {
-  margin-top: 0;
-  padding-inline: 1.4rem;
 }
 
 .hint {

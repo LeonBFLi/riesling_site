@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   const toolSecretContainer = document.getElementById("tool-share-secret");
   const toolRevealButton = document.querySelector("[data-tool-reveal]");
-  const exportPreviewButton = document.querySelector("[data-export-preview]");
 
   const setFeedback = (message, isError = false) => {
     if (!feedback) return;
@@ -136,12 +135,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (initiallyActive) {
       activateTimelineEntry(initiallyActive.dataset.entry);
     }
-  }
-
-  if (exportPreviewButton) {
-    exportPreviewButton.addEventListener("click", () => {
-      window.print();
-    });
   }
 
   const escapeHtml = (value) =>
