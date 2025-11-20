@@ -11,7 +11,7 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 
 DATA_DIR = Path(os.environ.get("DATA_DIRECTORY", "/etc/data")).resolve()
-VIDEO_DIR = Path(os.environ.get("VIDEO_DIRECTORY", "/opt/video")).resolve()
+VIDEO_DIR = Path(os.environ.get("VIDEO_DIRECTORY", "/var/video")).resolve()
 LOG_FILE = DATA_DIR / "messages.log"
 UPLOAD_DIR = DATA_DIR / "uploads"
 ALLOWED_IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg", ".gif", ".webp"}
@@ -51,9 +51,13 @@ def _iter_video_files() -> list[dict[str, str]]:
 def index() -> str:
     video_files = _iter_video_files()
     timeline_video = next((video for video in video_files if video["name"] == "2023-12-06-graduation.mp4"), None)
+    wandering_video = next(
+        (video for video in video_files if video["name"].lower().startswith("wandering")), None
+    )
     return render_template(
         "index.html",
         timeline_video=timeline_video,
+        wandering_video=wandering_video,
     )
 
 
