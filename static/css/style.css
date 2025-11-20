@@ -592,7 +592,7 @@ body::after {
   line-height: 1.8;
 }
 
-.timeline__cta {
+.timeline__cta { 
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
@@ -606,6 +606,19 @@ body::after {
   margin: 0;
   color: var(--primary-dark);
   font-weight: 600;
+}
+
+.timeline__cta-video {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(90, 108, 141, 0.18);
+  box-shadow: 0 12px 24px rgba(41, 51, 73, 0.12);
+}
+
+.timeline__cta-video video {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .timeline__cta-button {
