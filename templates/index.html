@@ -13,7 +13,34 @@
     />
     <script defer src="{{ url_for('static', filename='js/app.js') }}"></script>
   </head>
-  <body>
+  <body class="is-locked">
+    <div class="pass-gate" id="pass-gate" aria-hidden="false">
+      <div class="pass-gate__backdrop" aria-hidden="true"></div>
+      <div class="pass-gate__panel" role="dialog" aria-modal="true" aria-labelledby="pass-gate-title">
+        <p class="pass-gate__eyebrow" id="pass-gate-title">🔒 进入前的小小口令</p>
+        <p class="pass-gate__hint">Hint: What's that name starting with letter r?</p>
+        <form class="pass-gate__form" id="pass-gate-form" novalidate>
+          <label class="label pass-gate__label" for="pass-gate-input">口令</label>
+          <div class="pass-gate__controls">
+            <input
+              id="pass-gate-input"
+              class="input pass-gate__input"
+              type="password"
+              name="passcode"
+              inputmode="text"
+              autocomplete="off"
+              spellcheck="false"
+              placeholder="轻轻输入后按 Enter"
+              required
+              aria-describedby="pass-gate-feedback"
+            />
+            <button class="button pass-gate__button" type="submit">进入</button>
+          </div>
+          <p class="pass-gate__feedback" id="pass-gate-feedback" role="status" aria-live="polite"></p>
+        </form>
+        <p class="pass-gate__note">小提示：口令正确会立刻解锁，背景仍能看到熟悉的鲸鱼。</p>
+      </div>
+    </div>
     <div
       class="orientation-tip"
       id="orientation-tip"

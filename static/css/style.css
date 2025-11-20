@@ -74,6 +74,120 @@ body {
   outline: none;
 }
 
+
+body.is-locked .hero,
+body.is-locked .main,
+body.is-locked .footer,
+body.is-locked .orientation-tip {
+  filter: blur(6px);
+  pointer-events: none;
+  user-select: none;
+}
+
+.pass-gate {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 80;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.pass-gate--hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.pass-gate__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 52, 84, 0.45);
+  backdrop-filter: blur(10px) saturate(120%);
+}
+
+.pass-gate__panel {
+  position: relative;
+  z-index: 1;
+  width: min(520px, 92%);
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  border: 1px solid rgba(90, 108, 141, 0.15);
+}
+
+.pass-gate__eyebrow {
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+
+.pass-gate__hint {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.pass-gate__form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.pass-gate__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.pass-gate__input {
+  flex: 1;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(23, 50, 75, 0.18);
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.pass-gate__input:focus {
+  outline: 2px solid rgba(31, 111, 180, 0.35);
+  border-color: var(--primary);
+}
+
+.pass-gate__button {
+  white-space: nowrap;
+  padding: 0.8rem 1.2rem;
+}
+
+.pass-gate__feedback {
+  min-height: 1.25rem;
+  color: var(--primary-dark);
+  font-size: 0.95rem;
+}
+
+.pass-gate__feedback--error {
+  color: #b3261e;
+}
+
+.pass-gate__note {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 640px) {
+  .pass-gate__controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pass-gate__button {
+    width: 100%;
+  }
+}
+
 body::before,
 body::after {
   content: "🐋";
