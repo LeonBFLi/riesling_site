@@ -53,7 +53,8 @@
           <p class="encouragement__blessing">
             就算留恋也不要回头看<br />
             开往未来的路上<br />
-            不该有人在回返。
+            不该有人在回返。<br />
+            请一定保重。
           </p>
         </div>
       </section>
@@ -289,6 +290,19 @@
               <p>
                 这是 1206 过生日的那一天某个人告诉我不要发送给自己的视频。我轻轻把它放在这里，期待有一天它会被观看。
               </p>
+              {% if wandering_video %}
+              <div class="timeline__cta" role="group" aria-label="新的影片入口">
+                <p class="timeline__cta-text">wandering 已经静静安放在这里，随时可以继续播放这段旅程。</p>
+                <a
+                  class="button button--secondary timeline__cta-button"
+                  href="{{ wandering_video.url }}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  观看 {{ wandering_video.display_name }}
+                </a>
+              </div>
+              {% endif %}
             </article>
 
             <article

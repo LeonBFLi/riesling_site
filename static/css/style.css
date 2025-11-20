@@ -385,6 +385,7 @@ body::after {
   border-radius: 999px;
   font-size: 1.05rem;
   font-weight: 600;
+  text-decoration: none;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -589,6 +590,27 @@ body::after {
 
 .timeline__entry p {
   line-height: 1.8;
+}
+
+.timeline__cta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: 18px;
+  background: linear-gradient(120deg, rgba(90, 108, 141, 0.08), rgba(90, 108, 141, 0.04));
+  border: 1px solid rgba(90, 108, 141, 0.18);
+}
+
+.timeline__cta-text {
+  margin: 0;
+  color: var(--primary-dark);
+  font-weight: 600;
+}
+
+.timeline__cta-button {
+  margin: 0;
+  align-self: flex-start;
 }
 
 .timeline-letter {

@@ -51,9 +51,13 @@ def _iter_video_files() -> list[dict[str, str]]:
 def index() -> str:
     video_files = _iter_video_files()
     timeline_video = next((video for video in video_files if video["name"] == "2023-12-06-graduation.mp4"), None)
+    wandering_video = next(
+        (video for video in video_files if video["name"].lower().startswith("wandering")), None
+    )
     return render_template(
         "index.html",
         timeline_video=timeline_video,
+        wandering_video=wandering_video,
     )
 
 
