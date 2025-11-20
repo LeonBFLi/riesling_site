@@ -15,8 +15,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const passGateForm = document.getElementById("pass-gate-form");
   const passGateInput = document.getElementById("pass-gate-input");
   const passGateFeedback = document.getElementById("pass-gate-feedback");
+  const passGateSubmitButton = passGateForm?.querySelector("button[type='submit']");
   const PASS_GATE_KEY = "pass-gate-unlocked";
   const allowedPasscodes = ["riesling"];
+  const PASS_GATE_COOLDOWN_MS = 5000;
+  let passGateCooldownTimer = null;
 
   const setPassGateMessage = (message, isError = false) => {
     if (!passGateFeedback) return;
@@ -39,10 +42,46 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const validatePasscode = (value) => allowedPasscodes.includes(value.trim().toLowerCase());
 
+  const setPassGateControlsDisabled = (disabled) => {
+    if (passGateInput) {
+      passGateInput.disabled = disabled;
+    }
+    if (passGateSubmitButton) {
+      passGateSubmitButton.disabled = disabled;
+    }
+    if (passGateForm) {
+      passGateForm.classList.toggle("pass-gate__form--cooldown", disabled);
+    }
+  };
+
+  const startPassGateCooldown = () => {
+    const unlockAt = Date.now() + PASS_GATE_COOLDOWN_MS;
+    setPassGateControlsDisabled(true);
+
+    const updateCountdown = () => {
+      const remainingMs = unlockAt - Date.now();
+      const remainingSeconds = Math.max(0, Math.ceil(remainingMs / 1000));
+
+      if (remainingSeconds > 0) {
+        setPassGateMessage(`口令和提示不太匹配，请 ${remainingSeconds} 秒后再试一次。`, true);
+        return;
+      }
+
+      if (passGateCooldownTimer) {
+        window.clearInterval(passGateCooldownTimer);
+        passGateCooldownTimer = null;
+      }
+      setPassGateControlsDisabled(false);
+      setPassGateMessage("可以再次尝试输入口令了。");
+    };
+
+    updateCountdown();
+    passGateCooldownTimer = window.setInterval(updateCountdown, 250);
+  };
+
   const unlockPassGate = () => {
     sessionStorage.setItem(PASS_GATE_KEY, "1");
     togglePassGate(false);
-    setPassGateMessage("");
   };
 
   if (passGate) {
@@ -55,16 +94,22 @@ document.addEventListener("DOMContentLoaded", () => {
   if (passGateForm && passGateInput) {
     passGateForm.addEventListener("submit", (event) => {
       event.preventDefault();
+      if (passGateInput.disabled) {
+        return;
+      }
       const value = passGateInput.value || "";
       if (!value.trim()) {
         setPassGateMessage("需要先输入口令。", true);
         return;
       }
       if (!validatePasscode(value)) {
-        setPassGateMessage("口令和提示不太匹配，再试一次。", true);
+        startPassGateCooldown();
         return;
       }
-      unlockPassGate();
+      setPassGateMessage("口令正确，正在解锁，欢迎回来。");
+      window.setTimeout(() => {
+        unlockPassGate();
+      }, 300);
     });
   }
 
@@ -318,6 +363,34 @@ document.addEventListener("DOMContentLoaded", () => {
         updateOrientationTip();
       });
     }
+  }
+
+  const timezoneValues = Array.from(document.querySelectorAll("[data-timezone]"));
+
+  const formatTimeForZone = (zone) =>
+    new Intl.DateTimeFormat("zh-CN", {
+      timeZone: zone,
+      hour12: false,
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    }).format(new Date());
+
+  const updateTimezones = () => {
+    timezoneValues.forEach((valueEl) => {
+      const zone = valueEl.dataset.timezone;
+      if (!zone) return;
+      try {
+        valueEl.textContent = formatTimeForZone(zone);
+      } catch (error) {
+        valueEl.textContent = "--:--:--";
+      }
+    });
+  };
+
+  if (timezoneValues.length > 0) {
+    updateTimezones();
+    window.setInterval(updateTimezones, 1000);
   }
 
 });

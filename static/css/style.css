@@ -137,6 +137,10 @@ body.is-locked .orientation-tip {
   gap: 0.6rem;
 }
 
+.pass-gate__form--cooldown {
+  opacity: 0.72;
+}
+
 .pass-gate__controls {
   display: flex;
   align-items: center;
@@ -150,6 +154,11 @@ body.is-locked .orientation-tip {
   border: 1px solid rgba(23, 50, 75, 0.18);
   font-size: 1rem;
   background: rgba(255, 255, 255, 0.85);
+}
+
+.pass-gate__form--cooldown .pass-gate__input,
+.pass-gate__form--cooldown .pass-gate__button {
+  cursor: not-allowed;
 }
 
 .pass-gate__input:focus {
@@ -197,6 +206,50 @@ body::after {
   z-index: 0;
   pointer-events: none;
   filter: drop-shadow(0 8px 18px rgba(13, 69, 118, 0.45));
+}
+
+.timezone-panel {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(15, 52, 84, 0.68);
+  color: #f5fbff;
+  border-radius: var(--radius-lg);
+  padding: 0.85rem 1rem;
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 0.35rem;
+  text-align: right;
+  z-index: 30;
+  border: 1px solid rgba(90, 108, 141, 0.25);
+}
+
+.timezone-panel__item {
+  display: grid;
+  grid-template-columns: auto;
+  gap: 0.1rem;
+}
+
+.timezone-panel__label {
+  font-size: 0.9rem;
+  color: rgba(245, 251, 255, 0.82);
+}
+
+.timezone-panel__value {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+@media (max-width: 640px) {
+  .timezone-panel {
+    position: static;
+    margin: 0.5rem 1rem;
+    text-align: left;
+  }
+
+  .timezone-panel__value {
+    font-size: 1rem;
+  }
 }
 
 body::before {
