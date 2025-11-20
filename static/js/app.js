@@ -11,6 +11,63 @@ document.addEventListener("DOMContentLoaded", () => {
   const toolSecretContainer = document.getElementById("tool-share-secret");
   const toolRevealButton = document.querySelector("[data-tool-reveal]");
 
+  const passGate = document.getElementById("pass-gate");
+  const passGateForm = document.getElementById("pass-gate-form");
+  const passGateInput = document.getElementById("pass-gate-input");
+  const passGateFeedback = document.getElementById("pass-gate-feedback");
+  const PASS_GATE_KEY = "pass-gate-unlocked";
+  const allowedPasscodes = ["riesling"];
+
+  const setPassGateMessage = (message, isError = false) => {
+    if (!passGateFeedback) return;
+    passGateFeedback.textContent = message;
+    passGateFeedback.classList.toggle("pass-gate__feedback--error", isError);
+  };
+
+  const togglePassGate = (shouldLock) => {
+    if (!passGate) return;
+    passGate.classList.toggle("pass-gate--hidden", !shouldLock);
+    passGate.setAttribute("aria-hidden", shouldLock ? "false" : "true");
+    document.body.classList.toggle("is-locked", shouldLock);
+    if (shouldLock && passGateInput instanceof HTMLElement) {
+      passGateInput.focus();
+      if (typeof passGateInput.setSelectionRange === "function") {
+        passGateInput.setSelectionRange(0, passGateInput.value.length);
+      }
+    }
+  };
+
+  const validatePasscode = (value) => allowedPasscodes.includes(value.trim().toLowerCase());
+
+  const unlockPassGate = () => {
+    sessionStorage.setItem(PASS_GATE_KEY, "1");
+    togglePassGate(false);
+    setPassGateMessage("");
+  };
+
+  if (passGate) {
+    const unlocked = sessionStorage.getItem(PASS_GATE_KEY) === "1";
+    togglePassGate(!unlocked);
+  } else {
+    document.body.classList.remove("is-locked");
+  }
+
+  if (passGateForm && passGateInput) {
+    passGateForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const value = passGateInput.value || "";
+      if (!value.trim()) {
+        setPassGateMessage("需要先输入口令。", true);
+        return;
+      }
+      if (!validatePasscode(value)) {
+        setPassGateMessage("口令和提示不太匹配，再试一次。", true);
+        return;
+      }
+      unlockPassGate();
+    });
+  }
+
   const setFeedback = (message, isError = false) => {
     if (!feedback) return;
     feedback.textContent = message;
