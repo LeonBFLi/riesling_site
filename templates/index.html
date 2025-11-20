@@ -14,6 +14,20 @@
     <script defer src="{{ url_for('static', filename='js/app.js') }}"></script>
   </head>
   <body class="is-locked">
+    <div class="timezone-panel" aria-live="polite">
+      <div class="timezone-panel__item">
+        <span class="timezone-panel__label">北京时间</span>
+        <span class="timezone-panel__value" data-timezone="Asia/Shanghai">--:--:--</span>
+      </div>
+      <div class="timezone-panel__item">
+        <span class="timezone-panel__label">新西兰 Christchurch 时间</span>
+        <span class="timezone-panel__value" data-timezone="Pacific/Auckland">--:--:--</span>
+      </div>
+      <div class="timezone-panel__item">
+        <span class="timezone-panel__label">温哥华时间</span>
+        <span class="timezone-panel__value" data-timezone="America/Vancouver">--:--:--</span>
+      </div>
+    </div>
     <div class="pass-gate" id="pass-gate" aria-hidden="false">
       <div class="pass-gate__backdrop" aria-hidden="true"></div>
       <div class="pass-gate__panel" role="dialog" aria-modal="true" aria-labelledby="pass-gate-title">
