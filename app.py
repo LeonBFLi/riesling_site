@@ -11,7 +11,7 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 
 DATA_DIR = Path(os.environ.get("DATA_DIRECTORY", "/etc/data")).resolve()
-VIDEO_DIR = Path(os.environ.get("VIDEO_DIRECTORY", "/var/video")).resolve()
+VIDEO_DIR = Path(os.environ.get("VIDEO_DIRECTORY", "/opt/video")).resolve()
 LOG_FILE = DATA_DIR / "messages.log"
 UPLOAD_DIR = DATA_DIR / "uploads"
 ALLOWED_IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg", ".gif", ".webp"}
