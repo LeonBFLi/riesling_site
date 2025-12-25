@@ -14,10 +14,12 @@ DATA_DIR = Path(os.environ.get("DATA_DIRECTORY", "/etc/data")).resolve()
 VIDEO_DIR = Path(os.environ.get("VIDEO_DIRECTORY", "/opt/video")).resolve()
 LOG_FILE = DATA_DIR / "messages.log"
 UPLOAD_DIR = DATA_DIR / "uploads"
+PASS_GATE_LOG_FILE = DATA_DIR / "pass_gate.log"
 ALLOWED_IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg", ".gif", ".webp"}
 ALLOWED_VIDEO_SUFFIXES = {".mp4", ".webm", ".mov", ".m4v"}
 EXPECTED_TOOL_ANSWER = "化身孤岛的鲸"
 ANSWER_FILE = Path(__file__).resolve().parent / "answer.txt"
+ALLOWED_PASSCODES = {"riesling"}
 
 
 def _iter_video_files() -> list[dict[str, str]]:
@@ -112,6 +114,51 @@ def guestbook() -> Response:
 
 @app.get("/health")
 def health() -> Response:
+    return jsonify({"status": "ok"})
+
+
+def _normalize_log_field(value: str | None) -> str:
+    if not value:
+        return "-"
+    return " ".join(str(value).split())
+
+
+@app.post("/pass-gate/log")
+def log_pass_gate_access() -> Response:
+    payload = request.get_json(silent=True) or {}
+    passcode = str(payload.get("passcode", "")).strip()
+
+    if not passcode:
+        return jsonify({"message": "需要输入口令才能解锁。"}), 400
+
+    if passcode.lower() not in ALLOWED_PASSCODES:
+        return jsonify({"message": "口令和提示不太匹配，请再试一次。"}), 403
+
+    timestamp = datetime.utcnow().isoformat(timespec="seconds") + "Z"
+    forwarded_for = request.headers.get("X-Forwarded-For", "")
+    client_ip = forwarded_for.split(",")[0].strip() if forwarded_for else (request.remote_addr or "")
+    user_agent = request.headers.get("User-Agent", "")
+    referrer = request.referrer or request.headers.get("Referer", "")
+    accept_language = request.headers.get("Accept-Language", "")
+    host = request.host or ""
+
+    try:
+        DATA_DIR.mkdir(parents=True, exist_ok=True)
+        with PASS_GATE_LOG_FILE.open("a", encoding="utf-8") as fp:
+            log_entry = (
+                f"{timestamp}\t"
+                f"passcode={_normalize_log_field(passcode)}\t"
+                f"ip={_normalize_log_field(client_ip)}\t"
+                f"host={_normalize_log_field(host)}\t"
+                f"path={_normalize_log_field(request.path)}\t"
+                f"referrer={_normalize_log_field(referrer)}\t"
+                f"user_agent={_normalize_log_field(user_agent)}\t"
+                f"accept_language={_normalize_log_field(accept_language)}"
+            )
+            fp.write(log_entry + "\n")
+    except OSError:
+        return jsonify({"message": "记录登录信息时出现问题，请稍后再试。"}), 500
+
     return jsonify({"status": "ok"})
 
 
