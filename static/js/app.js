@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const passGateFeedback = document.getElementById("pass-gate-feedback");
   const passGateSubmitButton = passGateForm?.querySelector("button[type='submit']");
   const PASS_GATE_KEY = "pass-gate-unlocked";
-  const allowedPasscodes = ["riesling"];
   const PASS_GATE_COOLDOWN_MS = 5000;
   let passGateCooldownTimer = null;
 
@@ -39,8 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   };
-
-  const validatePasscode = (value) => allowedPasscodes.includes(value.trim().toLowerCase());
 
   const setPassGateControlsDisabled = (disabled) => {
     if (passGateInput) {
@@ -92,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (passGateForm && passGateInput) {
-    passGateForm.addEventListener("submit", (event) => {
+    passGateForm.addEventListener("submit", async (event) => {
       event.preventDefault();
       if (passGateInput.disabled) {
         return;
@@ -102,14 +99,31 @@ document.addEventListener("DOMContentLoaded", () => {
         setPassGateMessage("需要先输入口令。", true);
         return;
       }
-      if (!validatePasscode(value)) {
-        startPassGateCooldown();
-        return;
+      setPassGateMessage("正在验证口令，请稍候...");
+      try {
+        const response = await fetch("/pass-gate/log", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ passcode: value }),
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => null);
+          const errorMessage = errorData?.message || "口令和提示不太匹配，请稍后再试。";
+          setPassGateMessage(errorMessage, true);
+          startPassGateCooldown();
+          return;
+        }
+
+        setPassGateMessage("口令正确，正在解锁，欢迎回来。");
+        window.setTimeout(() => {
+          unlockPassGate();
+        }, 300);
+      } catch (error) {
+        setPassGateMessage("验证口令时遇到问题，请稍后再试。", true);
       }
-      setPassGateMessage("口令正确，正在解锁，欢迎回来。");
-      window.setTimeout(() => {
-        unlockPassGate();
-      }, 300);
     });
   }
 
